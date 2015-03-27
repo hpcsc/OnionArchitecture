@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\DTO\Input\UpdateUserRolesAndPermissionInputModel.cs" />
     <Compile Include="Common\DTO\RoleDTO.cs" />
     <Compile Include="Common\DTO\UserDTO.cs" />
     <Compile Include="Common\IAuthenticateService.cs" />

@@ -39,6 +39,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentValidation">
+      <HintPath>..\packages\FluentValidation.5.5.0.0\lib\Net40\FluentValidation.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -131,6 +134,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Alerts\Alert.cs" />
+    <Compile Include="Helpers\Alerts\AlertDecoratorResult.cs" />
+    <Compile Include="Helpers\Alerts\AlertExtension.cs" />
+    <Compile Include="Helpers\HandleBusinessExceptionExceptionFilter.cs" />
+    <Compile Include="Helpers\ModelStateExtension.cs" />
+    <Compile Include="Helpers\ValidateModelStateActionFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -169,11 +178,16 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Permission\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Shared\_Alert.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OnionArchitecture.Bootstrapper\OnionArchitecture.Bootstrapper.csproj">
       <Project>{67468904-50ca-43cb-8a5a-da69238c0971}</Project>
       <Name>OnionArchitecture.Bootstrapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OnionArchitecture.Core\OnionArchitecture.Core.csproj">
+      <Project>{a2afe8a3-8b82-4d7a-bd8d-d5359dad7587}</Project>
+      <Name>OnionArchitecture.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\OnionArchitecture.Services.Interfaces\OnionArchitecture.Services.Interfaces.csproj">
       <Project>{38800c64-6bc9-434e-bc59-a5366a573bef}</Project>

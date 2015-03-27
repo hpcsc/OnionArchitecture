@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using OnionArchitecture.Services.Interfaces.Common;
+using OnionArchitecture.Services.Interfaces.Common.DTO.Input;
+using OnionArchitecture.UI.Web.Helpers;
+using OnionArchitecture.UI.Web.Helpers.Alerts;
 
 namespace OnionArchitecture.UI.Web.Controllers
 {
@@ -22,6 +21,14 @@ namespace OnionArchitecture.UI.Web.Controllers
             var users = _managePermissionService.FindAllUsers();
 
             return View(users);
+        }
+
+        [HandleBusinessException]
+        public ActionResult UpdateUserRolesAndPermission()
+        {
+            _managePermissionService.UpdateUserRolesAndPermission(new UpdateUserRolesAndPermissionInputModel());
+
+            return RedirectToAction("Index").WithSuccess("User updated successfully");
         }
 	}
 }
