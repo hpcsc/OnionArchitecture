@@ -1,0 +1,12 @@
+﻿
+namespace OnionArchitecture.Core.Models.Common
+{
+    public class Permission : EntityBase
+    {
+        public int? UserId { get; set; }
+        public int? RoleId { get; set; }
+        public int ResourceId { get; set; }
+        public Resource Resource { get; set; }
+        public PermissionType Type { get; set; }
+    }
+}

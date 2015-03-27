@@ -1,0 +1,14 @@
+/OnionArchitecture.Bootstrapper/bin
+/OnionArchitecture.Bootstrapper/obj
+/OnionArchitecture.Core/bin
+/OnionArchitecture.Core/obj
+/OnionArchitecture.Infrastructure/bin
+/OnionArchitecture.Infrastructure/obj
+/OnionArchitecture.Repository.EntityFramework/bin
+/OnionArchitecture.Repository.EntityFramework/obj
+/OnionArchitecture.Services/bin
+/OnionArchitecture.Services/obj
+/OnionArchitecture.Services.Interfaces/bin
+/OnionArchitecture.Services.Interfaces/obj
+/OnionArchitecture.UI.Web/bin
+/OnionArchitecture.UI.Web/obj

@@ -1,0 +1,27 @@
+﻿@model IEnumerable<OnionArchitecture.Services.Interfaces.Common.DTO.UserDTO>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">
+    <h3>Permission management</h3>
+</div>
+
+<div class="col-xs-4">
+    <div class="list-group">
+        @foreach (var user in Model)
+        {
+            <a href="#" class="list-group-item">@user.FullName</a>
+        }
+    </div>
+</div>
+<div class="col-xs-8">
+    <div class="panel panel-success">
+        <div class="panel-heading">Some heading</div>
+        <div class="panel-body">
+            <div class="well">Some info</div>
+        </div>
+    </div>
+</div>
