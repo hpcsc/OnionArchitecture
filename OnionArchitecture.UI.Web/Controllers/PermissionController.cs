@@ -23,6 +23,14 @@ namespace OnionArchitecture.UI.Web.Controllers
             return View(users);
         }
 
+        [HttpGet]
+        public ActionResult GetUserPermission(string username)
+        {
+            var model = _managePermissionService.GetUserPermission(username);
+
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
         [HandleBusinessException]
         public ActionResult UpdateUserRolesAndPermission()
         {

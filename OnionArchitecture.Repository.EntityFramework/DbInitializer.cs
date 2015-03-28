@@ -39,7 +39,7 @@ namespace OnionArchitecture.Repository.EntityFramework
                 },
                 new User
                 {
-                    UserName = "admin",
+                    UserName = "super",
                     FullName = "Super user",
                     Password = "super",
                     Status = UserStatus.Active,

@@ -149,6 +149,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\app\permission\app.js" />
+    <Content Include="Scripts\app\permission\controllers\permission-ctrl.js" />
+    <Content Include="Scripts\app\permission\services\data-service.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="NLog.config" />

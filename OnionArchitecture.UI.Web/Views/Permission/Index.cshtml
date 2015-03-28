@@ -9,19 +9,67 @@
     <h3>Permission management</h3>
 </div>
 
-<div class="col-xs-4">
-    <div class="list-group">
-        @foreach (var user in Model)
-        {
-            <a href="#" class="list-group-item">@user.FullName</a>
-        }
-    </div>
-</div>
-<div class="col-xs-8">
-    <div class="panel panel-success">
-        <div class="panel-heading">Some heading</div>
-        <div class="panel-body">
-            <div class="well">Some info</div>
+<div role="tabpanel" data-ng-app="PermissionModule" data-ng-controller="PermissionCtrl">
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#users" aria-controls="users" role="tab" data-toggle="tab">By users</a></li>
+        <li role="presentation"><a href="#resources" aria-controls="resources" role="tab" data-toggle="tab">By resources</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content" >
+        <div role="tabpanel" class="tab-pane active" id="users">
+            <div style="margin-top: 20px">
+                <div class="col-xs-4">
+                    <div class="list-group">
+                        @foreach (var user in Model)
+                        {
+                            <a data-ng-click="getUserPermission('@user.UserName')"
+                               data-ng-class="{ active: selectedUsername == '@user.UserName'}"
+                               class="list-group-item">@user.FullName</a>
+                        }
+                    </div>
+                </div>
+                <div class="col-xs-8" data-ng-show="selectedUser">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">{{selectedUser.FullName}}</div>
+                        <div class="panel-body">
+                            <div class="well">
+                                Roles
+                                <ul>
+                                    <li data-ng-repeat="role in selectedUser.Roles">{{role.Name}}</li>
+                                </ul>
+                            </div>
+
+                            <div class="well">
+                                Permissions
+                                <ul>
+                                    <li data-ng-repeat="permission in selectedUser.Permissions">{{permission.ResourceName}} - {{permission.Type}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="resources">
+            <div style="margin-top: 20px">Resources</div>
         </div>
     </div>
+    
+    <div class="clearfix"></div>
 </div>
+
+@section styles
+{
+    <style>
+        a.list-group-item {
+            cursor: pointer;
+        }
+    </style>
+}
+@section scripts
+{
+    @Scripts.Render("~/bundles/permission")
+}

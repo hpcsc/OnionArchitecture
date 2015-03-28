@@ -10,6 +10,7 @@ namespace OnionArchitecture.Bootstrapper
         {
             Mapper.CreateMap<Role, RoleDTO>();
             Mapper.CreateMap<User, UserDTO>();
+            Mapper.CreateMap<Permission, PermissionDTO>();
         }
     }
 }

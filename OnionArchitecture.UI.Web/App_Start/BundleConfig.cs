@@ -23,6 +23,12 @@ namespace OnionArchitecture.UI.Web
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/permission").Include(
+                      "~/Scripts/angular.min.js",
+                      "~/Scripts/app/permission/app.js",
+                      "~/Scripts/app/permission/services/data-service.js",
+                      "~/Scripts/app/permission/controllers/permission-ctrl.js"));
         }
     }
 }
