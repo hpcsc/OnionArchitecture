@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\ResourceRepository.cs" />
     <Compile Include="Common\RoleRepository.cs" />
     <Compile Include="Common\UserRepository.cs" />
     <Compile Include="DbInitializer.cs" />

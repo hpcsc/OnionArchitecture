@@ -15,6 +15,7 @@ namespace OnionArchitecture.Bootstrapper.DependencyResolution
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
             builder.RegisterType<UserRepository>().As<IUserRepository>().InstancePerRequest();
             builder.RegisterType<RoleRepository>().As<IRoleRepository>().InstancePerRequest();
+            builder.RegisterType<ResourceRepository>().As<IResourceRepository>().InstancePerRequest();
         }
     }
 }

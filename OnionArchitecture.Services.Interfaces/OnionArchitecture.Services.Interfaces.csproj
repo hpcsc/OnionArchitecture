@@ -42,6 +42,8 @@
     <Compile Include="Common\DTO\DisplayUserPermissionModel.cs" />
     <Compile Include="Common\DTO\Input\UpdateUserRolesAndPermissionInputModel.cs" />
     <Compile Include="Common\DTO\PermissionDTO.cs" />
+    <Compile Include="Common\DTO\PermissionIndexModel.cs" />
+    <Compile Include="Common\DTO\ResourceDTO.cs" />
     <Compile Include="Common\DTO\RoleDTO.cs" />
     <Compile Include="Common\DTO\UserDTO.cs" />
     <Compile Include="Common\IAuthenticateService.cs" />

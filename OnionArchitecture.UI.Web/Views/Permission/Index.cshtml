@@ -1,4 +1,4 @@
-﻿@model IEnumerable<OnionArchitecture.Services.Interfaces.Common.DTO.UserDTO>
+﻿@model OnionArchitecture.Services.Interfaces.Common.DTO.PermissionIndexModel
 
 @{
     ViewBag.Title = "Index";
@@ -23,7 +23,7 @@
             <div style="margin-top: 20px">
                 <div class="col-xs-4">
                     <div class="list-group">
-                        @foreach (var user in Model)
+                        @foreach (var user in Model.Users)
                         {
                             <a data-ng-click="getUserPermission('@user.UserName')"
                                data-ng-class="{ active: selectedUsername == '@user.UserName'}"
@@ -54,7 +54,14 @@
             </div>
         </div>
         <div role="tabpanel" class="tab-pane" id="resources">
-            <div style="margin-top: 20px">Resources</div>
+            <div style="margin-top: 20px">
+                <ul>
+                    @foreach (var resource in Model.Resources)
+                    {
+                        <li>@resource.Name</li>
+                    }
+                </ul>
+            </div>
         </div>
     </div>
     

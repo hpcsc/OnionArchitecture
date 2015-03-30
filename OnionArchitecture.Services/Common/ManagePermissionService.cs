@@ -14,19 +14,28 @@ namespace OnionArchitecture.Services.Common
         private readonly IRoleRepository _roleRepository;
         private readonly IUserRepository _userRepository;
         private readonly IValidatorFactory _validatorFactory;
+        private IResourceRepository _resourceRepository;
 
         public ManagePermissionService(IRoleRepository roleRepository, 
                                        IUserRepository userRepository, 
+                                       IResourceRepository resourceRepository,
                                        IValidatorFactory validatorFactory)
         {
             _roleRepository = roleRepository;
             _userRepository = userRepository;
+            _resourceRepository = resourceRepository;
             _validatorFactory = validatorFactory;
         }
 
-        public IEnumerable<UserDTO> FindAllUsers()
+        public PermissionIndexModel CreateIndexModel()
         {
-            return _userRepository.FindAll().Select(Mapper.Map<User, UserDTO>);
+            var model = new PermissionIndexModel
+            {
+                Users = _userRepository.FindAll().Select(Mapper.Map<User, UserDTO>),
+                Resources = _resourceRepository.FindAll().Select(Mapper.Map<Resource, ResourceDTO>)
+            };
+
+            return model;
         }
 
         public DisplayUserPermissionModel GetUserPermission(string username)

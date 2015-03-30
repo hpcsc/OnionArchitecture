@@ -6,7 +6,7 @@ namespace OnionArchitecture.Services.Interfaces.Common
 {
     public interface IManagePermissionService
     {
-        IEnumerable<UserDTO> FindAllUsers();
+        PermissionIndexModel CreateIndexModel();
         DisplayUserPermissionModel GetUserPermission(string username);
         void UpdateUserRolesAndPermission(UpdateUserRolesAndPermissionInputModel input);
     }

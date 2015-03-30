@@ -18,9 +18,9 @@ namespace OnionArchitecture.UI.Web.Controllers
 
         public ActionResult Index()
         {
-            var users = _managePermissionService.FindAllUsers();
+            var model = _managePermissionService.CreateIndexModel();
 
-            return View(users);
+            return View(model);
         }
 
         [HttpGet]
