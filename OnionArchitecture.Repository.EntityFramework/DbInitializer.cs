@@ -48,6 +48,14 @@ namespace OnionArchitecture.Repository.EntityFramework
             };
 
             users.ForEach(r => context.Set<User>().Add(r));
+
+            var resources = new List<Resource>
+            {
+                new Resource { Name = "Menu.Permission" }
+            };
+
+            resources.ForEach(r => context.Set<Resource>().Add(r));
+
             context.SaveChanges();
         }
     }
