@@ -6,7 +6,9 @@ namespace OnionArchitecture.Repository.EntityFramework.Mapping
     {
         public PermissionMap()
         {
-            HasRequired(c => c.Resource).WithMany().HasForeignKey(c => c.ResourceId);
+            HasRequired(c => c.Resource).WithMany(c => c.Permissions).HasForeignKey(c => c.ResourceId);
+            HasOptional(c => c.User).WithMany(c => c.Permissions).HasForeignKey(c => c.UserId);
+            HasOptional(c => c.Role).WithMany(c => c.Permissions).HasForeignKey(c => c.RoleId);
         }
     }
 }

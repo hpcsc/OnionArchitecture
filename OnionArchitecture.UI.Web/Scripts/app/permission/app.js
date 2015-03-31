@@ -1,1 +1,1 @@
-﻿angular.module("PermissionModule", []);
+﻿angular.module("PermissionModule", ["ngTable"]);

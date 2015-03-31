@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using OnionArchitecture.Core.Models.Common;
+using System.Collections.Generic;
 using System.Data.Entity;
-using OnionArchitecture.Core.Models.Common;
 
 namespace OnionArchitecture.Repository.EntityFramework
 {
@@ -49,9 +49,52 @@ namespace OnionArchitecture.Repository.EntityFramework
 
             users.ForEach(r => context.Set<User>().Add(r));
 
+            context.SaveChanges();
+
             var resources = new List<Resource>
             {
-                new Resource { Name = "Menu.Permission" }
+                new Resource 
+                { 
+                    Name = "Menu", 
+                    Children = new List<Resource>
+                    {
+                        new Resource { 
+                            Name = "About",
+                            Permissions = new List<Permission>
+                            {
+                                new Permission
+                                {
+                                    UserId = users[0].Id,
+                                    Type  = PermissionType.Read | PermissionType.Update
+                                }
+                            }
+                        },
+                        new Resource 
+                        { 
+                            Name = "Contact",
+                            Permissions = new List<Permission>
+                            {
+                                new Permission
+                                {
+                                    UserId = users[1].Id,
+                                    Type  = PermissionType.Read | PermissionType.Create
+                                }
+                            }
+                        },             
+                        new Resource 
+                        { 
+                            Name = "Permission",
+                            Permissions = new List<Permission>
+                            {
+                                new Permission
+                                {
+                                    UserId = users[2].Id,
+                                    Type  = PermissionType.Read | PermissionType.Delete | PermissionType.Deny
+                                }
+                            }
+                        }
+                    }
+                }
             };
 
             resources.ForEach(r => context.Set<Resource>().Add(r));

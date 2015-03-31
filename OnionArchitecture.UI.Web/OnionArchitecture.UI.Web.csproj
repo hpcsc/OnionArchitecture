@@ -124,27 +124,32 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\ControllerBase\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\PermissionController.cs" />
+    <Compile Include="Content\Controllers\ControllerBase.cs" />
+    <Compile Include="Content\Controllers\HomeController.cs" />
+    <Compile Include="Content\Controllers\PermissionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Alerts\Alert.cs" />
     <Compile Include="Helpers\Alerts\AlertDecoratorResult.cs" />
     <Compile Include="Helpers\Alerts\AlertExtension.cs" />
+    <Compile Include="Helpers\FrameworkExtensions\JsonNetResult.cs" />
     <Compile Include="Helpers\HandleBusinessExceptionExceptionFilter.cs" />
     <Compile Include="Helpers\ModelStateExtension.cs" />
     <Compile Include="Helpers\ValidateModelStateActionFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-treeview.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\ng-table.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -152,14 +157,19 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app\permission\app.js" />
     <Content Include="Scripts\app\permission\controllers\permission-ctrl.js" />
+    <Content Include="Scripts\app\permission\directives\resource-table.html" />
+    <Content Include="Scripts\app\permission\directives\resource-table.js" />
+    <Content Include="Scripts\app\permission\directives\resource-tree.js" />
     <Content Include="Scripts\app\permission\services\data-service.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="NLog.config" />
+    <Content Include="Scripts\bootstrap-treeview.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\ng-table.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
@@ -183,6 +193,7 @@
     <Content Include="Views\Permission\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Shared\_Alert.cshtml" />
+    <Content Include="Scripts\ng-table.min.js.map" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OnionArchitecture.Bootstrapper\OnionArchitecture.Bootstrapper.csproj">

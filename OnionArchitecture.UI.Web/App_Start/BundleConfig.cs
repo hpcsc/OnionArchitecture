@@ -1,5 +1,4 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace OnionArchitecture.UI.Web
 {
@@ -24,11 +23,19 @@ namespace OnionArchitecture.UI.Web
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
 
+            bundles.Add(new StyleBundle("~/Content/permission").Include(
+                      "~/Content/ng-table.min.css",
+                      "~/Content/bootstrap-treeview.css"));
+
             bundles.Add(new ScriptBundle("~/bundles/permission").Include(
                       "~/Scripts/angular.min.js",
+                      "~/Scripts/ng-table.min.js",
+                      "~/Scripts/bootstrap-treeview.min.js",
                       "~/Scripts/app/permission/app.js",
                       "~/Scripts/app/permission/services/data-service.js",
-                      "~/Scripts/app/permission/controllers/permission-ctrl.js"));
+                      "~/Scripts/app/permission/controllers/permission-ctrl.js",
+                      "~/Scripts/app/permission/directives/resource-tree.js",
+                      "~/Scripts/app/permission/directives/resource-table.js"));
         }
     }
 }

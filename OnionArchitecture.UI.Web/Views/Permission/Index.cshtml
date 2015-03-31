@@ -1,6 +1,4 @@
-﻿@model OnionArchitecture.Services.Interfaces.Common.DTO.PermissionIndexModel
-
-@{
+﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -23,12 +21,12 @@
             <div style="margin-top: 20px">
                 <div class="col-xs-4">
                     <div class="list-group">
-                        @foreach (var user in Model.Users)
-                        {
-                            <a data-ng-click="getUserPermission('@user.UserName')"
-                               data-ng-class="{ active: selectedUsername == '@user.UserName'}"
-                               class="list-group-item">@user.FullName</a>
-                        }
+                        
+                        <a data-ng-repeat="user in users"
+                            data-ng-click="getUserPermission(user.userName)"
+                            data-ng-class="{ active: selectedUsername == user.userName}"
+                            class="list-group-item">{{user.fullName}}</a>
+                        
                     </div>
                 </div>
                 <div class="col-xs-8" data-ng-show="selectedUser">
@@ -55,12 +53,12 @@
         </div>
         <div role="tabpanel" class="tab-pane" id="resources">
             <div style="margin-top: 20px">
-                <ul>
-                    @foreach (var resource in Model.Resources)
-                    {
-                        <li>@resource.Name</li>
-                    }
-                </ul>
+                <div class="col-xs-4" >
+                    <resource-tree data-resources="resources" ></resource-tree>
+                </div>
+                <div class="col-xs-8" >
+                    <resource-table></resource-table>
+                </div>
             </div>
         </div>
     </div>
@@ -70,6 +68,7 @@
 
 @section styles
 {
+    @Styles.Render("~/Content/permission")
     <style>
         a.list-group-item {
             cursor: pointer;
