@@ -29,6 +29,15 @@ namespace OnionArchitecture.UI.Web.Controllers
             return JsonNet(model);
 		}
 
+        [HttpPost]
+        [HandleBusinessException(ForAjaxRequest = true)]
+	    public ActionResult UpdateResource(UpdateResourceInputModel input)
+        {
+            _managePermissionService.UpdateResource(input);
+
+            return JsonNet(new {Success = true});
+        }
+
 		public ActionResult Index()
 		{
 			return View();

@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Newtonsoft.Json;
 using OnionArchitecture.UI.Web.Helpers.Alerts;
+using OnionArchitecture.UI.Web.Helpers.FrameworkExtensions;
 
 namespace OnionArchitecture.UI.Web.Helpers
 {
@@ -26,7 +27,7 @@ namespace OnionArchitecture.UI.Web.Helpers
                 var validationException = filterContext.Exception as FluentValidation.ValidationException;
                 if (ForAjaxRequest)
                 {
-                    filterContext.Result = new JsonResult()
+                    filterContext.Result = new JsonNetResult()
                     {
                         Data = new
                         {

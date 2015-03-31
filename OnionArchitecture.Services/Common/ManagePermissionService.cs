@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FluentValidation;
+using OnionArchitecture.Core.Infrastructure.Repositories;
 using OnionArchitecture.Core.Models.Common;
 using OnionArchitecture.Services.Interfaces.Common;
 using OnionArchitecture.Services.Interfaces.Common.DTO;
@@ -13,17 +14,20 @@ namespace OnionArchitecture.Services.Common
         private readonly IRoleRepository _roleRepository;
         private readonly IUserRepository _userRepository;
         private readonly IValidatorFactory _validatorFactory;
-        private IResourceRepository _resourceRepository;
+        private readonly IResourceRepository _resourceRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
         public ManagePermissionService(IRoleRepository roleRepository, 
                                        IUserRepository userRepository, 
                                        IResourceRepository resourceRepository,
-                                       IValidatorFactory validatorFactory)
+                                       IValidatorFactory validatorFactory,
+                                       IUnitOfWork unitOfWork)
         {
             _roleRepository = roleRepository;
             _userRepository = userRepository;
             _resourceRepository = resourceRepository;
             _validatorFactory = validatorFactory;
+            _unitOfWork = unitOfWork;
         }
 
         public PermissionIndexModel CreateIndexModel()
@@ -71,6 +75,7 @@ namespace OnionArchitecture.Services.Common
             {
                 ResourceId = resource.Id,
                 ResourceName = resource.Name,
+                ResourceDescription = resource.Description,
                 Permissions = resource.Permissions.Select(p => 
                     {
                         if(p.UserId.HasValue)
@@ -124,8 +129,21 @@ namespace OnionArchitecture.Services.Common
         {
             var validator = _validatorFactory.GetValidator<UpdateUserRolesAndPermissionInputModel>();
             validator.ValidateAndThrow(input);
-
+            
             //Update
+        }
+
+        public void UpdateResource(UpdateResourceInputModel input)
+        {
+            var validator = _validatorFactory.GetValidator<UpdateResourceInputModel>();
+            validator.ValidateAndThrow(input);
+
+            var resourceToUpdate = _resourceRepository.FindBy(input.Id);
+            resourceToUpdate.Name = input.Name;
+            resourceToUpdate.Description = input.Description;
+
+            _resourceRepository.Update(resourceToUpdate);
+            _unitOfWork.Commit();
         }
     }
 }

@@ -10,7 +10,7 @@
             link: function (scope, elm, attrs) {
                 var unwatch = scope.$watch("resources", function (resources) {
                     if (angular.isDefined(resources)) {
-                        unwatch();
+                        //unwatch();
                         init(); 
                     }
                 });
@@ -22,7 +22,7 @@
                             $rootScope.$broadcast("resourceTreeNodeClicked", data);
                         }
                     });
-                }
+                }                
             }
         };
     }]);

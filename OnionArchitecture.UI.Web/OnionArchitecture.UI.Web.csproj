@@ -157,8 +157,8 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app\permission\app.js" />
     <Content Include="Scripts\app\permission\controllers\permission-ctrl.js" />
-    <Content Include="Scripts\app\permission\directives\resource-table.html" />
-    <Content Include="Scripts\app\permission\directives\resource-table.js" />
+    <Content Include="Scripts\app\permission\directives\resource-detail.html" />
+    <Content Include="Scripts\app\permission\directives\resource-detail.js" />
     <Content Include="Scripts\app\permission\directives\resource-tree.js" />
     <Content Include="Scripts\app\permission\services\data-service.js" />
     <Content Include="Scripts\bootstrap.js" />

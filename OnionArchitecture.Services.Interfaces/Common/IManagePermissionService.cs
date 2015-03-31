@@ -9,5 +9,6 @@ namespace OnionArchitecture.Services.Interfaces.Common
         DisplayUserPermissionModel GetUserPermission(string username);
         DisplayResourceDetailModel GetResourceDetail(int resourceId);
         void UpdateUserRolesAndPermission(UpdateUserRolesAndPermissionInputModel input);
+        void UpdateResource(UpdateResourceInputModel input);
     }
 }

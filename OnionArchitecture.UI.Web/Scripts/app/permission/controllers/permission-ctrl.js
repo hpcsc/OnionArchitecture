@@ -21,6 +21,13 @@
         }).get();
     }
 
+    function loadData(dataService, $scope) {
+        dataService.getInitialIndexModel().then(function (model) {
+            $scope.users = model.users;
+            $scope.resources = mapToTreeModel(model.resources);
+        }, handleError);
+    }
+
     angular.module("PermissionModule").controller("PermissionCtrl", [
         "$scope", "dataService", function ($scope, dataService) {
             $scope.selectedUsername = "";
@@ -36,10 +43,11 @@
                 }, handleError);
             }
 
-            dataService.getInitialIndexModel().then(function (model) {
-                $scope.users = model.users;
-                $scope.resources = mapToTreeModel(model.resources);
-            }, handleError);
+            loadData(dataService, $scope);
+
+            $scope.$on("resourceUpdated", function () {
+                loadData(dataService, $scope);
+            });
         }
     ]);
 })();

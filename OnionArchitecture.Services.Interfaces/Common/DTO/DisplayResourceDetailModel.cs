@@ -7,6 +7,7 @@ namespace OnionArchitecture.Services.Interfaces.Common.DTO
     {
         public int ResourceId { get; set; }
         public string ResourceName { get; set; }
+        public string ResourceDescription { get; set; }
         public List<DisplayResourceDetailPermissionModel> Permissions { get; set; }
 
     }

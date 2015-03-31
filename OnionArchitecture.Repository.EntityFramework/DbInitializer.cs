@@ -60,6 +60,7 @@ namespace OnionArchitecture.Repository.EntityFramework
                     {
                         new Resource { 
                             Name = "About",
+                            Description = "Resource to control permission to view About menu",
                             Permissions = new List<Permission>
                             {
                                 new Permission
@@ -72,6 +73,7 @@ namespace OnionArchitecture.Repository.EntityFramework
                         new Resource 
                         { 
                             Name = "Contact",
+                            Description = "Resource to control permission to view Contact menu",
                             Permissions = new List<Permission>
                             {
                                 new Permission
@@ -84,6 +86,7 @@ namespace OnionArchitecture.Repository.EntityFramework
                         new Resource 
                         { 
                             Name = "Permission",
+                            Description = "Resource to control permission to view Permission menu",
                             Permissions = new List<Permission>
                             {
                                 new Permission

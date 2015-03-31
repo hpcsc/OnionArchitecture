@@ -11,21 +11,31 @@
 
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active"><a href="#users" aria-controls="users" role="tab" data-toggle="tab">By users</a></li>
-        <li role="presentation"><a href="#resources" aria-controls="resources" role="tab" data-toggle="tab">By resources</a></li>
+        <li role="presentation" class="active"><a href="#resources" aria-controls="resources" role="tab" data-toggle="tab">By resources</a></li>
+        <li role="presentation"><a href="#users" aria-controls="users" role="tab" data-toggle="tab">By users</a></li>        
     </ul>
 
     <!-- Tab panes -->
     <div class="tab-content" >
-        <div role="tabpanel" class="tab-pane active" id="users">
+        <div role="tabpanel" class="tab-pane active" id="resources">
+            <div style="margin-top: 20px">
+                <div class="col-xs-4">
+                    <resource-tree data-resources="resources"></resource-tree>
+                </div>
+                <div class="col-xs-8">
+                    <resource-detail></resource-detail>
+                </div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="users">
             <div style="margin-top: 20px">
                 <div class="col-xs-4">
                     <div class="list-group">
                         
                         <a data-ng-repeat="user in users"
-                            data-ng-click="getUserPermission(user.userName)"
-                            data-ng-class="{ active: selectedUsername == user.userName}"
-                            class="list-group-item">{{user.fullName}}</a>
+                           data-ng-click="getUserPermission(user.userName)"
+                           data-ng-class="{ active: selectedUsername == user.userName}"
+                           class="list-group-item">{{user.fullName}}</a>
                         
                     </div>
                 </div>
@@ -48,16 +58,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div role="tabpanel" class="tab-pane" id="resources">
-            <div style="margin-top: 20px">
-                <div class="col-xs-4" >
-                    <resource-tree data-resources="resources" ></resource-tree>
-                </div>
-                <div class="col-xs-8" >
-                    <resource-table></resource-table>
                 </div>
             </div>
         </div>

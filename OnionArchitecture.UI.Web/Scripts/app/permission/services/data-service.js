@@ -10,6 +10,10 @@
 
         getResourceDetail = function (id) {
             return get('/permission/getResourceDetail?id=' + id);
+        },
+            
+        updateResource = function(data) {
+            return post('/permission/updateResource', data);
         };
 
         function get(url) {
@@ -25,10 +29,28 @@
             return deferred.promise;
         }
 
+        function post(url, data) {
+            var deferred = $q.defer();
+
+            $http.post(url, data)
+               .success(function (response) {
+                   if (response.success) {                       
+                       deferred.resolve(response);
+                   } else {                       
+                       deferred.reject(response.errors.join("<br/>"));
+                   }
+               }).error(function (msg, code) {
+                   deferred.reject(msg);
+               });
+
+            return deferred.promise;
+        }
+
         return {
             getUserPermission: getUserPermission,
             getInitialIndexModel: getInitialIndexModel,
-            getResourceDetail: getResourceDetail
+            getResourceDetail: getResourceDetail,
+            updateResource: updateResource
         };
     }]);
 })();
