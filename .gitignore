@@ -12,4 +12,6 @@
 /OnionArchitecture.Services.Interfaces/obj
 /OnionArchitecture.UI.Web/bin
 /OnionArchitecture.UI.Web/obj
+/OnionArchitecture.UI.Web/App_Data/*.mdf
+/OnionArchitecture.UI.Web/App_Data/*.ldf
 OnionArchitecture.v12.suo
