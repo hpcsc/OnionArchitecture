@@ -46,6 +46,7 @@
     <Compile Include="Infrastructure\Repositories\IUnitOfWork.cs" />
     <Compile Include="Infrastructure\Repositories\PaginationInfo.cs" />
     <Compile Include="Infrastructure\Settings\IApplicationSettings.cs" />
+    <Compile Include="Models\Common\IPermissionRepository.cs" />
     <Compile Include="Models\Common\IResourceRepository.cs" />
     <Compile Include="Models\Common\IRoleRepository.cs" />
     <Compile Include="Models\Common\IUserRepository.cs" />

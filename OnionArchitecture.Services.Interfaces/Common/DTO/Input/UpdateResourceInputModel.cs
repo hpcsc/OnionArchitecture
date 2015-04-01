@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using OnionArchitecture.Core.Models.Common;
+﻿using OnionArchitecture.Core.Models.Common;
+using System.Collections.Generic;
 
 namespace OnionArchitecture.Services.Interfaces.Common.DTO.Input
 {
@@ -13,6 +13,7 @@ namespace OnionArchitecture.Services.Interfaces.Common.DTO.Input
 
     public class UpdateResourcePermissionInputModel
     {
+        public int PermissionId { get; set; }
         public int Id { get; set; }
         public bool IsRole { get; set; }
         public PermissionType Permission { get; set; }

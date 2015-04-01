@@ -1,23 +1,23 @@
-﻿using System;
+﻿using OnionArchitecture.Core.Infrastructure.Repositories;
+using OnionArchitecture.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Linq.Expressions;
-using OnionArchitecture.Core.Infrastructure.Repositories;
-using OnionArchitecture.Core.Models;
 
 namespace OnionArchitecture.Repository.EntityFramework
 {
     public abstract class RepositoryBase<T> : IRepository<T> where T : EntityBase
     {
-        private readonly IDbContext _context;
+        protected readonly IDbContext Context;
         protected DbSet<T> Set;
 
         protected RepositoryBase(IDbContext context)
         {
-            _context = context;
-            Set = _context.Set<T>() as DbSet<T>;
+            Context = context;
+            Set = Context.Set<T>() as DbSet<T>;
         }
 
         public T FindBy(int id, bool includeNavigationProperties = false)
@@ -124,7 +124,7 @@ namespace OnionArchitecture.Repository.EntityFramework
                 throw new ArgumentException("Entity cannot be null");
             }
 
-            DbEntityEntry dbEntityEntry = _context.Entry(entity);
+            DbEntityEntry dbEntityEntry = Context.Entry(entity);
             if (dbEntityEntry.State != EntityState.Detached)
             {
                 dbEntityEntry.State = EntityState.Added;
@@ -148,7 +148,7 @@ namespace OnionArchitecture.Repository.EntityFramework
 
         public void Delete(T entity)
         {
-            DbEntityEntry dbEntityEntry = _context.Entry(entity);
+            DbEntityEntry dbEntityEntry = Context.Entry(entity);
             if (dbEntityEntry.State != EntityState.Deleted)
             {
                 dbEntityEntry.State = EntityState.Deleted;
@@ -162,7 +162,7 @@ namespace OnionArchitecture.Repository.EntityFramework
 
         public void Update(T entity)
         {
-            DbEntityEntry dbEntityEntry = _context.Entry(entity);
+            DbEntityEntry dbEntityEntry = Context.Entry(entity);
             if (dbEntityEntry.State == EntityState.Detached)
             {
                 Set.Attach(entity);

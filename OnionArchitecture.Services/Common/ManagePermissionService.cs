@@ -16,32 +16,33 @@ namespace OnionArchitecture.Services.Common
         private readonly IValidatorFactory _validatorFactory;
         private readonly IResourceRepository _resourceRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IPermissionRepository _permissionRepository;
 
         public ManagePermissionService(IRoleRepository roleRepository, 
                                        IUserRepository userRepository, 
                                        IResourceRepository resourceRepository,
+                                       IPermissionRepository permissionRepository,
                                        IValidatorFactory validatorFactory,
                                        IUnitOfWork unitOfWork)
         {
             _roleRepository = roleRepository;
             _userRepository = userRepository;
             _resourceRepository = resourceRepository;
+            _permissionRepository = permissionRepository;
             _validatorFactory = validatorFactory;
             _unitOfWork = unitOfWork;
         }
 
         public PermissionIndexModel CreateIndexModel()
         {
-            var resources = _resourceRepository.FindBy(r => !r.ParentId.HasValue, r => r.Children)
-                                               .Select(Mapper.Map<Resource, ResourceDTO>)
-                                               .OrderBy(r => r.Name);
+            var hierarchy = _resourceRepository.GetResourceHierarchy();
 
             var model = new PermissionIndexModel
             {
                 Users = _userRepository.FindAll().Select(Mapper.Map<User, UserDTO>),
-                Resources = _resourceRepository.FindBy(r => !r.ParentId.HasValue)
-                                               .Select(Mapper.Map<Resource, ResourceDTO>)
-                                               .OrderBy(r => r.Name)
+                Resources = hierarchy
+                                    .Select(Mapper.Map<Resource, ResourceDTO>)
+                                    .OrderBy(r => r.Name)
             };
 
             return model;
@@ -82,6 +83,7 @@ namespace OnionArchitecture.Services.Common
                         {
                             return new DisplayResourceDetailPermissionModel
                             {
+                                PermissionId = p.Id,
                                 Id = p.UserId.Value,
                                 Name = p.User.FullName,
                                 Type = "User",
@@ -92,6 +94,7 @@ namespace OnionArchitecture.Services.Common
                         {
                             return new DisplayResourceDetailPermissionModel
                             {
+                                PermissionId = p.Id,
                                 Id = p.RoleId.Value,
                                 Name = p.Role.Name,
                                 Type = "Role",
@@ -143,6 +146,46 @@ namespace OnionArchitecture.Services.Common
             resourceToUpdate.Description = input.Description;
 
             _resourceRepository.Update(resourceToUpdate);
+
+            var newPermissions = input.Permissions.Where(i => i.PermissionId == 0).Select(i => new Permission
+                {
+                    UserId = i.IsRole ? null : (int?)i.Id,
+                    RoleId = i.IsRole ? (int?)i.Id : null,
+                    ResourceId = input.Id,
+                    Type = i.Permission
+                });
+
+            foreach (var newPermission in newPermissions)
+            {
+                _permissionRepository.Add(newPermission);    
+            }
+
+            var existingPermissionIds = input.Permissions.Where(p => p.PermissionId > 0).Select(p => p.PermissionId);
+            var existingPermissions = _permissionRepository.FindBy(p => existingPermissionIds.Contains(p.Id));
+            foreach (var existingPermission in existingPermissions)
+            {
+                var i = input.Permissions.FirstOrDefault(p => p.PermissionId == existingPermission.Id);
+                if(i != null)
+                {
+                    existingPermission.Type = i.Permission;
+                    _permissionRepository.Update(existingPermission);
+                }
+            }
+
+            _unitOfWork.Commit();
+        }
+
+        public void AddResource(AddResourceInputModel input)
+        {
+            var validator = _validatorFactory.GetValidator<AddResourceInputModel>();
+            validator.ValidateAndThrow(input);
+
+            _resourceRepository.Add(new Resource
+                {
+                    Name = input.Name,
+                    ParentId = input.ParentId
+                });
+
             _unitOfWork.Commit();
         }
     }

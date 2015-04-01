@@ -159,6 +159,7 @@
     <Content Include="Scripts\app\permission\controllers\permission-ctrl.js" />
     <Content Include="Scripts\app\permission\directives\resource-detail.html" />
     <Content Include="Scripts\app\permission\directives\resource-detail.js" />
+    <Content Include="Scripts\app\permission\directives\resource-tree.html" />
     <Content Include="Scripts\app\permission\directives\resource-tree.js" />
     <Content Include="Scripts\app\permission\services\data-service.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -173,6 +174,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="SetUp\ResourceHierarchyView.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

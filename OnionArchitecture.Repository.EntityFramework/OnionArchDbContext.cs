@@ -1,6 +1,6 @@
-﻿using System.Data.Entity;
+﻿using OnionArchitecture.Repository.EntityFramework.Mapping;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
-using OnionArchitecture.Repository.EntityFramework.Mapping;
 
 namespace OnionArchitecture.Repository.EntityFramework
 {
@@ -8,7 +8,7 @@ namespace OnionArchitecture.Repository.EntityFramework
     {
         static OnionArchDbContext()
         {
-            Database.SetInitializer<OnionArchDbContext>(null);            
+            Database.SetInitializer<OnionArchDbContext>(null);
         }
 
         public OnionArchDbContext(string connectionStringName)

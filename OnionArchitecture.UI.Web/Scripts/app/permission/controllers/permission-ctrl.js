@@ -12,7 +12,8 @@
             var node = {
                 text: r.name,
                 nodes: [],
-                id: r.id
+                id: r.id,
+                permissionId: r.permissionId
             };
 
             node.nodes = mapToTreeModel(r.children);
@@ -46,6 +47,10 @@
             loadData(dataService, $scope);
 
             $scope.$on("resourceUpdated", function () {
+                loadData(dataService, $scope);
+            });
+
+            $scope.$on("newResourceAdded", function () {
                 loadData(dataService, $scope);
             });
         }

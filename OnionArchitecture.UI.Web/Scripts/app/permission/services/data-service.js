@@ -14,6 +14,10 @@
             
         updateResource = function(data) {
             return post('/permission/updateResource', data);
+        },
+            
+        addResource = function (data) {
+            return post('/permission/addResource', data);
         };
 
         function get(url) {
@@ -50,7 +54,8 @@
             getUserPermission: getUserPermission,
             getInitialIndexModel: getInitialIndexModel,
             getResourceDetail: getResourceDetail,
-            updateResource: updateResource
+            updateResource: updateResource,
+            addResource: addResource
         };
     }]);
 })();

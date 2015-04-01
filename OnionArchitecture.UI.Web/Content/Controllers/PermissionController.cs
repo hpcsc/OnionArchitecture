@@ -24,19 +24,28 @@ namespace OnionArchitecture.UI.Web.Controllers
 
 		public ActionResult GetResourceDetail(int id)
 		{
-            var model = _managePermissionService.GetResourceDetail(id);
+			var model = _managePermissionService.GetResourceDetail(id);
 
-            return JsonNet(model);
+			return JsonNet(model);
 		}
 
-        [HttpPost]
-        [HandleBusinessException(ForAjaxRequest = true)]
-	    public ActionResult UpdateResource(UpdateResourceInputModel input)
-        {
-            _managePermissionService.UpdateResource(input);
+		[HttpPost]
+		[HandleBusinessException(ForAjaxRequest = true)]
+		public ActionResult UpdateResource(UpdateResourceInputModel input)
+		{
+			_managePermissionService.UpdateResource(input);
 
-            return JsonNet(new {Success = true});
-        }
+			return JsonNet(new {Success = true});
+		}
+
+		[HttpPost]
+		[HandleBusinessException(ForAjaxRequest = true)]
+		public ActionResult AddResource(AddResourceInputModel input)
+		{
+			_managePermissionService.AddResource(input);
+
+			return JsonNet(new { Success = true });
+		}
 
 		public ActionResult Index()
 		{

@@ -18,6 +18,8 @@ namespace OnionArchitecture.Bootstrapper.DependencyResolution
                 As<IValidator<UpdateUserRolesAndPermissionInputModel>>().InstancePerRequest();
             builder.RegisterType<UpdateResourceValidator>().
                 As<IValidator<UpdateResourceInputModel>>().InstancePerRequest();
+            builder.RegisterType<AddResourceValidator>().
+                As<IValidator<AddResourceInputModel>>().InstancePerRequest();
         }
     }
 }

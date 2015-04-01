@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Common\AuthenticateService.cs" />
     <Compile Include="Common\ManagePermissionService.cs" />
+    <Compile Include="Common\Validators\AddResourceValidator.cs" />
     <Compile Include="Common\Validators\UpdateResourceValidator.cs" />
     <Compile Include="Common\Validators\UpdateUserRolesAndPermissionValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

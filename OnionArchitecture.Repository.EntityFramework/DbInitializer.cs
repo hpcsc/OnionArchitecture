@@ -81,6 +81,13 @@ namespace OnionArchitecture.Repository.EntityFramework
                                     UserId = users[1].Id,
                                     Type  = PermissionType.Read | PermissionType.Create
                                 }
+                            },
+                            Children = new List<Resource>
+                            {
+                                new Resource
+                                {
+                                    Name = "ContactChild"
+                                }
                             }
                         },             
                         new Resource 

@@ -55,6 +55,7 @@
                     $($scope.tableParams.data).each(function (i, group) {                        
                         $(group.data).each(function (j, obj) {                            
                             data.permissions.push({
+                                permissionId: obj.permissionId,
                                 id: obj.id,
                                 isRole: obj.type == "Role",
                                 permission: obj.permission

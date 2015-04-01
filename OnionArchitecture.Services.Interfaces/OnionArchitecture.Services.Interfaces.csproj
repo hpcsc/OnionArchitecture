@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Common\DTO\DisplayResourceDetailModel.cs" />
     <Compile Include="Common\DTO\DisplayUserPermissionModel.cs" />
+    <Compile Include="Common\DTO\Input\AddResourceInputModel.cs" />
     <Compile Include="Common\DTO\Input\UpdateResourceInputModel.cs" />
     <Compile Include="Common\DTO\Input\UpdateUserRolesAndPermissionInputModel.cs" />
     <Compile Include="Common\DTO\PermissionDTO.cs" />
