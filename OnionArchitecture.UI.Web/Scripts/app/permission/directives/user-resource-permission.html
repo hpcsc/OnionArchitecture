@@ -1,0 +1,35 @@
+﻿<div>
+    <div class="panel panel-default">
+        <div class="panel-heading"><strong>Resource permission</strong></div>
+        <div class="panel-body">
+            <table ng-table="tableParams" class="table table-bordered">
+                <tbody>
+                    <tr ng-repeat="p in permissions">
+                        <td sortable="name" data-title="'Name'">
+                            {{p.resourceName}}
+                        </td>
+                        <td data-title="'Create'">
+                            <input type="checkbox" class="checkbox" data-ng-checked="isChecked(p.type, 2)" data-ng-click="updatePermission(p, 1)" />
+                        </td>
+                        <td data-title="'Read'">
+                            <input type="checkbox" class="checkbox" data-ng-checked="isChecked(p.type, 2)" data-ng-click="updatePermission(p, 2)" />
+                        </td>
+                        <td data-title="'Update'">
+                            <input type="checkbox" class="checkbox" data-ng-checked="isChecked(p.type, 4)" data-ng-click="updatePermission(p, 4)" />
+                        </td>
+                        <td data-title="'Delete'">
+                            <input type="checkbox" class="checkbox" data-ng-checked="isChecked(p.type, 8)" data-ng-click="updatePermission(p, 8)" />
+                        </td>
+                        <td data-title="'Deny'">
+                            <input type="checkbox" class="checkbox" data-ng-checked="isChecked(p.type, 16)" data-ng-click="updatePermission(p, 16)" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="col-xs-12 text-center">
+        <input type="button" class="btn btn-primary" value="Update" data-ng-click="updateResource()" />
+    </div>
+</div>

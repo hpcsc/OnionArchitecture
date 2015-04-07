@@ -4,7 +4,7 @@ namespace OnionArchitecture.Services.Interfaces.Common.DTO
 {
     public class PermissionIndexModel
     {
-        public IEnumerable<UserDTO> Users { get; set; }
         public IEnumerable<ResourceDTO> Resources { get; set; }
+        public IEnumerable<RoleDTO> AvailableRoles { get; set; }
     }
 }

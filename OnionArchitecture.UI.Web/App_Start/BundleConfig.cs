@@ -35,7 +35,8 @@ namespace OnionArchitecture.UI.Web
                       "~/Scripts/app/permission/services/data-service.js",
                       "~/Scripts/app/permission/controllers/permission-ctrl.js",
                       "~/Scripts/app/permission/directives/resource-tree.js",
-                      "~/Scripts/app/permission/directives/resource-detail.js"));
+                      "~/Scripts/app/permission/directives/resource-detail.js",
+                      "~/Scripts/app/permission/directives/user-resource-permission.js"));
         }
     }
 }

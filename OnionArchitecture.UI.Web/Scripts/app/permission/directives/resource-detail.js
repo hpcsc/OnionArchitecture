@@ -44,7 +44,6 @@
                 }
 
                 $scope.updateResource = function () {
-                    console.log($scope.tableParams.data);
                     var data = {
                         id: $scope.currentResource.resourceId,
                         name: $scope.currentResource.resourceName,

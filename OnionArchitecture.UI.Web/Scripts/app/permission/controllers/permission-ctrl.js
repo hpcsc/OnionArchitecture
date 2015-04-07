@@ -24,8 +24,8 @@
 
     function loadData(dataService, $scope) {
         dataService.getInitialIndexModel().then(function (model) {
-            $scope.users = model.users;
             $scope.resources = mapToTreeModel(model.resources);
+            $scope.availableRoles = model.availableRoles;
         }, handleError);
     }
 
@@ -33,7 +33,16 @@
         "$scope", "dataService", function ($scope, dataService) {
             $scope.selectedUsername = "";
             $scope.selectedUser = null;
-            $scope.selectedResource = null;
+            $scope.searchUserInput = "";
+            $scope.users = [];
+            $scope.availableRoles = [];
+
+            $scope.searchUser = function () {
+                dataService.searchUser($scope.searchUserInput).
+                    then(function (data) {
+                        $scope.users = data;
+                    }, handleError);
+            }
 
 
             $scope.getUserPermission = function(username) {
@@ -42,6 +51,16 @@
                 dataService.getUserPermission(username).then(function(user) {
                     $scope.selectedUser = user;
                 }, handleError);
+            }
+
+            $scope.hasRole = function (user, role) {
+                for (var i = 0; i < user.roles.length; i++) {
+                    if (user.roles[i].id == role.id) {
+                        return true;
+                    }
+                }
+
+                return false;
             }
 
             loadData(dataService, $scope);

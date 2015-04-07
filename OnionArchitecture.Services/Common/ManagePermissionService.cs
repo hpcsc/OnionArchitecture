@@ -5,6 +5,7 @@ using OnionArchitecture.Core.Models.Common;
 using OnionArchitecture.Services.Interfaces.Common;
 using OnionArchitecture.Services.Interfaces.Common.DTO;
 using OnionArchitecture.Services.Interfaces.Common.DTO.Input;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace OnionArchitecture.Services.Common
@@ -39,10 +40,10 @@ namespace OnionArchitecture.Services.Common
 
             var model = new PermissionIndexModel
             {
-                Users = _userRepository.FindAll().Select(Mapper.Map<User, UserDTO>),
                 Resources = hierarchy
                                     .Select(Mapper.Map<Resource, ResourceDTO>)
-                                    .OrderBy(r => r.Name)
+                                    .OrderBy(r => r.Name),
+                AvailableRoles = _roleRepository.FindAll().Select(Mapper.Map<Role, RoleDTO>)
             };
 
             return model;
@@ -58,7 +59,9 @@ namespace OnionArchitecture.Services.Common
             {
                 FullName = user.FullName,
                 Roles = user.Roles.Select(Mapper.Map<Role, RoleDTO>).ToList(),
-                Permissions = user.Permissions.Select(Mapper.Map<Permission, PermissionDTO>).ToList()
+                Permissions = user.Permissions.Select(Mapper.Map<Permission, PermissionDTO>)
+                                              .OrderBy(p => p.ResourceName)
+                                              .ToList()
             };
 
             return model;
@@ -187,6 +190,15 @@ namespace OnionArchitecture.Services.Common
                 });
 
             _unitOfWork.Commit();
+        }
+
+        public IEnumerable<UserDTO> SearchUser(string input)
+        {
+            var users = string.IsNullOrWhiteSpace(input) ?
+                _userRepository.FindAll() :
+                _userRepository.FindBy(u => u.UserName.Contains(input));
+
+            return users.Select(Mapper.Map<User, UserDTO>);
         }
     }
 }

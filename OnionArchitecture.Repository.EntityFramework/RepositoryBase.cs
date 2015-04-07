@@ -3,7 +3,6 @@ using OnionArchitecture.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -12,30 +11,18 @@ namespace OnionArchitecture.Repository.EntityFramework
     public abstract class RepositoryBase<T> : IRepository<T> where T : EntityBase
     {
         protected readonly IDbContext Context;
-        protected DbSet<T> Set;
+        protected IDbSet<T> Set;
 
         protected RepositoryBase(IDbContext context)
         {
             Context = context;
-            Set = Context.Set<T>() as DbSet<T>;
+            Set = Context.Set<T>();
         }
 
-        public T FindBy(int id, bool includeNavigationProperties = false)
+        public T FindBy(int id, params Expression<Func<T, object>>[] includeExpressions)
         {
             Expression<Func<T, bool>> filter = (e => e.Id == id);
-            return FindBy(filter, includeNavigationProperties).FirstOrDefault();
-        }
-
-        public IEnumerable<T> FindBy(Expression<Func<T, bool>> filter, bool includeNavigationProperties = false)
-        {
-            if (includeNavigationProperties)
-            {
-                return Set.IncludeNavigationProperties().Where(filter).ToList();
-            }
-            else
-            {
-                return Set.Where(filter).ToList();
-            }
+            return FindBy(filter, includeExpressions).FirstOrDefault();
         }
 
         public IEnumerable<T> FindBy(Expression<Func<T, bool>> filter, params Expression<Func<T, object>>[] includeExpressions)
@@ -48,13 +35,6 @@ namespace OnionArchitecture.Repository.EntityFramework
             }
 
             return query.Where(filter).ToList();
-        }
-
-        public IEnumerable<T> FindBy(Expression<Func<T, bool>> filter, PaginationInfo paginationInfo, bool includeNavigationProperties = false)
-        {
-            IQueryable<T> query = includeNavigationProperties ? Set.IncludeNavigationProperties() : Set;
-
-            return FindWithEagerLoadedProperties(filter, paginationInfo, query);
         }
 
         public IEnumerable<T> FindBy(Expression<Func<T, bool>> filter, PaginationInfo paginationInfo, params Expression<Func<T, object>>[] includeExpressions)
@@ -88,18 +68,6 @@ namespace OnionArchitecture.Repository.EntityFramework
             return query.ToList();
         }
 
-        public IEnumerable<T> FindAll(bool includeNavigationProperties = false)
-        {
-            if (includeNavigationProperties)
-            {
-                return Set.IncludeNavigationProperties().ToList();
-            }
-            else
-            {
-                return GetQueryable().ToList();
-            }
-        }
-
         public IEnumerable<T> FindAll(params Expression<Func<T, object>>[] includeExpressions)
         {
             IQueryable<T> query = Set;
@@ -124,7 +92,7 @@ namespace OnionArchitecture.Repository.EntityFramework
                 throw new ArgumentException("Entity cannot be null");
             }
 
-            DbEntityEntry dbEntityEntry = Context.Entry(entity);
+            var dbEntityEntry = Context.Entry(entity);
             if (dbEntityEntry.State != EntityState.Detached)
             {
                 dbEntityEntry.State = EntityState.Added;
@@ -148,7 +116,7 @@ namespace OnionArchitecture.Repository.EntityFramework
 
         public void Delete(T entity)
         {
-            DbEntityEntry dbEntityEntry = Context.Entry(entity);
+            var dbEntityEntry = Context.Entry(entity);
             if (dbEntityEntry.State != EntityState.Deleted)
             {
                 dbEntityEntry.State = EntityState.Deleted;
@@ -162,7 +130,7 @@ namespace OnionArchitecture.Repository.EntityFramework
 
         public void Update(T entity)
         {
-            DbEntityEntry dbEntityEntry = Context.Entry(entity);
+            var dbEntityEntry = Context.Entry(entity);
             if (dbEntityEntry.State == EntityState.Detached)
             {
                 Set.Attach(entity);

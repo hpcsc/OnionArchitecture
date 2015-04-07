@@ -124,7 +124,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\ControllerBase\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -161,6 +160,8 @@
     <Content Include="Scripts\app\permission\directives\resource-detail.js" />
     <Content Include="Scripts\app\permission\directives\resource-tree.html" />
     <Content Include="Scripts\app\permission\directives\resource-tree.js" />
+    <Content Include="Scripts\app\permission\directives\user-resource-permission.html" />
+    <Content Include="Scripts\app\permission\directives\user-resource-permission.js" />
     <Content Include="Scripts\app\permission\services\data-service.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

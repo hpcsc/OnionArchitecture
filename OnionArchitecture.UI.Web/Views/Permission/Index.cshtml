@@ -29,32 +29,49 @@
         </div>
         <div role="tabpanel" class="tab-pane" id="users">
             <div style="margin-top: 20px">
-                <div class="col-xs-4">
-                    <div class="list-group">
-                        
-                        <a data-ng-repeat="user in users"
-                           data-ng-click="getUserPermission(user.userName)"
-                           data-ng-class="{ active: selectedUsername == user.userName}"
-                           class="list-group-item">{{user.fullName}}</a>
-                        
+                <div class="panel panel-default col-xs-6" >
+                    <div class="panel-heading" >
+                        Search username
+                    </div>
+                    <div class="panel-body" >
+                        <div class="col-xs-10">
+                            <input type="text" class="form-control" style="max-width: none" data-ng-model="searchUserInput" />
+                        </div>
+                        <div class="col-xs-2">
+                            <input type="button" class="btn btn-primary" value="Search" data-ng-click="searchUser()" />
+                        </div>
                     </div>
                 </div>
-                <div class="col-xs-8" data-ng-show="selectedUser">
-                    <div class="panel panel-success">
-                        <div class="panel-heading">{{selectedUser.FullName}}</div>
-                        <div class="panel-body">
-                            <div class="well">
-                                Roles
-                                <ul>
-                                    <li data-ng-repeat="role in selectedUser.Roles">{{role.Name}}</li>
-                                </ul>
-                            </div>
+                
+                <div class="clearfix" ></div>
+                <div data-ng-show="users.length > 0" style="margin-top: 20px">
+                    <div class="col-xs-4">
+                        <div class="list-group">
 
-                            <div class="well">
-                                Permissions
-                                <ul>
-                                    <li data-ng-repeat="permission in selectedUser.Permissions">{{permission.ResourceName}} - {{permission.Type}}</li>
-                                </ul>
+                            <a data-ng-repeat="user in users"
+                               data-ng-click="getUserPermission(user.userName)"
+                               data-ng-class="{ active: selectedUsername == user.userName}"
+                               class="list-group-item">{{user.fullName}}</a>
+
+                        </div>
+                    </div>
+                    <div class="col-xs-8" data-ng-if="selectedUser">
+                        <div class="panel panel-success">
+                            <div class="panel-heading">{{selectedUser.fullName}}</div>
+                            <div class="panel-body">
+                                <div class="well">
+                                    Roles
+                                    <ul>
+                                        <li data-ng-repeat="role in availableRoles">
+                                            <input type="checkbox" data-ng-checked="hasRole(selectedUser, role)" />{{role.name}}
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="well">
+                                    Permissions
+                                    <user-resource-permission data-permissions="selectedUser.permissions"></user-resource-permission>
+                                </div>
                             </div>
                         </div>
                     </div>

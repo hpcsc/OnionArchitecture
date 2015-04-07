@@ -29,6 +29,12 @@ namespace OnionArchitecture.UI.Web.Controllers
 			return JsonNet(model);
 		}
 
+		public ActionResult SearchUser(string input)
+		{
+			var users = _managePermissionService.SearchUser(input);
+			return JsonNet(users);
+		}
+
 		[HttpPost]
 		[HandleBusinessException(ForAjaxRequest = true)]
 		public ActionResult UpdateResource(UpdateResourceInputModel input)
@@ -57,7 +63,7 @@ namespace OnionArchitecture.UI.Web.Controllers
 		{
 			var model = _managePermissionService.GetUserPermission(username);
 
-			return Json(model, JsonRequestBehavior.AllowGet);
+			return JsonNet(model);
 		}
 
 		[HandleBusinessException]
