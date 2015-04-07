@@ -41,6 +41,8 @@
                 dataService.searchUser($scope.searchUserInput).
                     then(function (data) {
                         $scope.users = data;
+
+                        $scope.showSearchResult = true;
                     }, handleError);
             }
 
@@ -50,6 +52,42 @@
 
                 dataService.getUserPermission(username).then(function(user) {
                     $scope.selectedUser = user;
+                }, handleError);
+            }
+
+            $scope.updateUserRole = function (role) {
+                var user = $scope.selectedUser;
+                if ($scope.hasRole(user, role)) {
+                    var index = -1;
+                    for (var i = 0; i < user.roles.length; i++) {
+                        if (user.roles[i].id == role.id) {
+                            index = i;
+                            break;
+                        }
+                    }
+
+                    user.roles.splice(index, 1);
+                }
+                else {
+                    user.roles.push(role);
+                }
+            }
+
+            $scope.updateUserRolesAndPermission = function () {
+                var data = {
+                    userId: $scope.selectedUser.userId,
+                    fullName: $scope.selectedUser.fullName,
+                    userPermissions: $scope.selectedUser.userPermissions,
+                    roles: $scope.selectedUser.roles
+                };
+
+                dataService.updateUserRolesAndPermission(data).then(function (response) {
+                    if (response && response.success) {
+                        //refresh
+                    }
+                    else {
+                        handleError(response.errors.join("<br/>"));
+                    }
                 }, handleError);
             }
 

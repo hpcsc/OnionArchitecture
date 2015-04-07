@@ -1,7 +1,6 @@
 ﻿using OnionArchitecture.Services.Interfaces.Common;
 using OnionArchitecture.Services.Interfaces.Common.DTO.Input;
 using OnionArchitecture.UI.Web.Helpers;
-using OnionArchitecture.UI.Web.Helpers.Alerts;
 using System.Web.Mvc;
 
 namespace OnionArchitecture.UI.Web.Controllers
@@ -66,12 +65,15 @@ namespace OnionArchitecture.UI.Web.Controllers
 			return JsonNet(model);
 		}
 
-		[HandleBusinessException]
-		public ActionResult UpdateUserRolesAndPermission()
+		[HandleBusinessException(ForAjaxRequest=true)]
+		public ActionResult UpdateUserRolesAndPermission(UpdateUserRolesAndPermissionInputModel input)
 		{
-			_managePermissionService.UpdateUserRolesAndPermission(new UpdateUserRolesAndPermissionInputModel());
+			_managePermissionService.UpdateUserRolesAndPermission(input);
 
-			return RedirectToAction("Index").WithSuccess("User updated successfully");
+			return JsonNet(new
+			{
+				success = true
+			});
 		}
 	}
 }

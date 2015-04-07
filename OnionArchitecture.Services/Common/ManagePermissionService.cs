@@ -55,11 +55,24 @@ namespace OnionArchitecture.Services.Common
                 u => u.Roles, 
                 u => u.Permissions.Select(p => p.Resource)).FirstOrDefault();
 
+            var userRoles = user.Roles.Select(r => r.Id);
+            var rolePermissions = _permissionRepository.FindBy(p => p.RoleId.HasValue &&
+                                        userRoles.Contains(p.RoleId.Value),
+                                        p => p.Resource);
+
+            var mergedPermissions = PermissionService.MergePermissions(user.Permissions.Concat(rolePermissions).ToList());
+
             var model = new DisplayUserPermissionModel
             {
+                UserId = user.Id,
                 FullName = user.FullName,
                 Roles = user.Roles.Select(Mapper.Map<Role, RoleDTO>).ToList(),
-                Permissions = user.Permissions.Select(Mapper.Map<Permission, PermissionDTO>)
+                UserPermissions = mergedPermissions.UserPermissions
+                                              .Select(Mapper.Map<Permission, PermissionDTO>)
+                                              .OrderBy(p => p.ResourceName)
+                                              .ToList(),
+                RolePermissions = mergedPermissions.RolePermissions
+                                              .Select(Mapper.Map<Permission, PermissionDTO>)
                                               .OrderBy(p => p.ResourceName)
                                               .ToList()
             };
@@ -135,8 +148,24 @@ namespace OnionArchitecture.Services.Common
         {
             var validator = _validatorFactory.GetValidator<UpdateUserRolesAndPermissionInputModel>();
             validator.ValidateAndThrow(input);
-            
-            //Update
+
+            var user = _userRepository.FindBy(input.UserId, u => u.Roles);
+            user.FullName = input.FullName;
+
+            var existingRoleIds = user.Roles.Select(r => r.Id);
+            var newRoleIds = input.Roles.Select(r => r.Id).Except(existingRoleIds);
+            var deletedRoles = user.Roles.Where(r => input.Roles.FirstOrDefault(i => i.Id == r.Id) == null).ToList();
+
+            deletedRoles.ForEach(d => user.Roles.Remove(d));
+
+            var newRoles = _roleRepository.FindBy(r => newRoleIds.Contains(r.Id)).ToList();
+            newRoles.ForEach(r => user.Roles.Add(r));
+
+            _userRepository.Update(user);
+
+            //Update user permission
+
+            _unitOfWork.Commit();
         }
 
         public void UpdateResource(UpdateResourceInputModel input)
@@ -150,7 +179,9 @@ namespace OnionArchitecture.Services.Common
 
             _resourceRepository.Update(resourceToUpdate);
 
-            var newPermissions = input.Permissions.Where(i => i.PermissionId == 0).Select(i => new Permission
+            var newPermissions = input.Permissions.Where(i => i.PermissionId == 0 && 
+                                                              i.Permission != PermissionType.None)
+                                                  .Select(i => new Permission
                 {
                     UserId = i.IsRole ? null : (int?)i.Id,
                     RoleId = i.IsRole ? (int?)i.Id : null,
@@ -170,8 +201,15 @@ namespace OnionArchitecture.Services.Common
                 var i = input.Permissions.FirstOrDefault(p => p.PermissionId == existingPermission.Id);
                 if(i != null)
                 {
-                    existingPermission.Type = i.Permission;
-                    _permissionRepository.Update(existingPermission);
+                    if(i.Permission == PermissionType.None)
+                    {
+                        _permissionRepository.Delete(existingPermission.Id);
+                    }
+                    else
+                    {
+                        existingPermission.Type = i.Permission;
+                        _permissionRepository.Update(existingPermission);
+                    }
                 }
             }
 

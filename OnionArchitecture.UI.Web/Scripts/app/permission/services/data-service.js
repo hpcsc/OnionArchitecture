@@ -22,6 +22,10 @@
             
         searchUser = function (input) {
             return get('/permission/searchUser?input=' + input);
+        },
+            
+        updateUserRolesAndPermission = function (data) {
+            return post('/permission/updateUserRolesAndPermission', data);
         };
 
         function get(url) {
@@ -60,7 +64,8 @@
             getResourceDetail: getResourceDetail,
             updateResource: updateResource,
             addResource: addResource,
-            searchUser: searchUser
+            searchUser: searchUser,
+            updateUserRolesAndPermission: updateUserRolesAndPermission
         };
     }]);
 })();

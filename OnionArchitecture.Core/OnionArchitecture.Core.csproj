@@ -51,10 +51,12 @@
     <Compile Include="Models\Common\IRoleRepository.cs" />
     <Compile Include="Models\Common\IUserRepository.cs" />
     <Compile Include="Models\Common\Permission.cs" />
+    <Compile Include="Models\Common\PermissionService.cs" />
     <Compile Include="Models\Common\PermissionType.cs" />
     <Compile Include="Models\Common\Resource.cs" />
     <Compile Include="Models\Common\Role.cs" />
     <Compile Include="Models\Common\User.cs" />
+    <Compile Include="Models\Common\UserPermissionContainer.cs" />
     <Compile Include="Models\Common\UserStatus.cs" />
     <Compile Include="Models\EntityBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

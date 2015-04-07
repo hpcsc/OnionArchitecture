@@ -29,21 +29,30 @@
         </div>
         <div role="tabpanel" class="tab-pane" id="users">
             <div style="margin-top: 20px">
-                <div class="panel panel-default col-xs-6" >
-                    <div class="panel-heading" >
-                        Search username
-                    </div>
-                    <div class="panel-body" >
-                        <div class="col-xs-10">
-                            <input type="text" class="form-control" style="max-width: none" data-ng-model="searchUserInput" />
+                <div class="col-xs-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Search username
                         </div>
-                        <div class="col-xs-2">
-                            <input type="button" class="btn btn-primary" value="Search" data-ng-click="searchUser()" />
+                        <div class="panel-body">
+                            <div class="col-xs-10">
+                                <input type="text" class="form-control" style="max-width: none" data-ng-model="searchUserInput" />
+                            </div>
+                            <div class="col-xs-2">
+                                <input type="button" class="btn btn-primary" value="Search" data-ng-click="searchUser()" />
+                            </div>
                         </div>
                     </div>
                 </div>
                 
                 <div class="clearfix" ></div>
+
+                <hr />
+
+                <div class="alert alert-success" style="margin-left: 15px; margin-right: 15px" data-ng-show="showSearchResult">
+                    {{users.length}} user(s) found
+                </div>
+
                 <div data-ng-show="users.length > 0" style="margin-top: 20px">
                     <div class="col-xs-4">
                         <div class="list-group">
@@ -56,23 +65,31 @@
                         </div>
                     </div>
                     <div class="col-xs-8" data-ng-if="selectedUser">
-                        <div class="panel panel-success">
-                            <div class="panel-heading">{{selectedUser.fullName}}</div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">User information</div>
                             <div class="panel-body">
-                                <div class="well">
+                                <div class="form-group">
+                                    <label for="fullNameTxt">Full name </label>
+                                    <input class="form-control" type="text" id="fullNameTxt" data-ng-model="selectedUser.fullName" />
+                                </div>
+                                <div class="form-group">
                                     Roles
                                     <ul>
-                                        <li data-ng-repeat="role in availableRoles">
-                                            <input type="checkbox" data-ng-checked="hasRole(selectedUser, role)" />{{role.name}}
+                                        <li style="list-style-type: none" data-ng-repeat="role in availableRoles">
+                                            <input type="checkbox" data-ng-checked="hasRole(selectedUser, role)" 
+                                                   data-ng-click="updateUserRole(role)" />{{role.name}}
                                         </li>
                                     </ul>
                                 </div>
-
-                                <div class="well">
-                                    Permissions
-                                    <user-resource-permission data-permissions="selectedUser.permissions"></user-resource-permission>
-                                </div>
                             </div>
+                        </div>
+
+                        <user-resource-permission data-user-permissions="selectedUser.userPermissions"
+                          data-role-permissions="selectedUser.rolePermissions"></user-resource-permission>
+
+
+                        <div class="col-xs-12 text-center">
+                            <input type="button" class="btn btn-primary" value="Update" data-ng-click="updateUserRolesAndPermission()" />
                         </div>
                     </div>
                 </div>

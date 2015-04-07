@@ -37,9 +37,19 @@
 
                 $scope.updatePermission = function (object, permission) {
                     if ($scope.isChecked(object.permission, permission)) {
-                        object.permission -= permission;
+                        if (permission == 16) {
+                            object.permission = 0;
+                        }
+                        else {
+                            object.permission -= permission;
+                        }
                     } else {
-                        object.permission += permission;
+                        if (permission == 16) {
+                            object.permission = 16;
+                        }
+                        else {
+                            object.permission += permission;
+                        }
                     }                    
                 }
 

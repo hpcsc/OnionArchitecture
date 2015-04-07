@@ -3,23 +3,35 @@
         return {
             restrict: "E",
             scope: {
-                permissions: "="
+                userPermissions: "=",
+                rolePermissions: "="
             },
             templateUrl: "/Scripts/app/permission/directives/user-resource-permission.html",
             controller: function ($scope) {
-                $scope.tableParams = new ngTableParams({
+                $scope.userTableParams = new ngTableParams({
                     page: 1,
                     count: 10
                 }, {
                     getData: function ($defer, params) {
-                        if ($scope.permissions && $scope.permissions.length > 0) {
-                            $defer.resolve($scope.permissions);
+                        if ($scope.userPermissions && $scope.userPermissions.length > 0) {
+                            $defer.resolve($scope.userPermissions);
                         }
                     }
                 });
 
-                $scope.$watchCollection("permissions", function () {
-                    $scope.tableParams.reload();
+                $scope.roleTableParams = new ngTableParams({
+                    page: 1,
+                    count: 10
+                }, {
+                    getData: function ($defer, params) {
+                        if ($scope.rolePermissions && $scope.rolePermissions.length > 0) {
+                            $defer.resolve($scope.rolePermissions);
+                        }
+                    }
+                });
+
+                $scope.$watchCollection("userPermissions", function () {
+                    $scope.userTableParams.reload();
                 });
 
                 $scope.isChecked = function (permission, toCheckAgainst) {
@@ -28,9 +40,19 @@
 
                 $scope.updatePermission = function (object, permission) {
                     if ($scope.isChecked(object.type, permission)) {
-                        object.type -= permission;
+                        if (permission == 16) {
+                            object.type = 0;
+                        }
+                        else {
+                            object.type -= permission;
+                        }
                     } else {
-                        object.type += permission;
+                        if (permission == 16) {
+                            object.type = 16;
+                        }
+                        else {
+                            object.type += permission;
+                        }
                     }
                 }
             }

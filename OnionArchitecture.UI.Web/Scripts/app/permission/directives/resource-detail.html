@@ -37,19 +37,33 @@
                             {{object.name}}
                         </td>
                         <td data-title="'Create'">
-                            <input type="checkbox" class="checkbox" data-ng-checked="isChecked(object.permission, 1)" data-ng-click="updatePermission(object, 1)" />
+                            <input type="checkbox" class="checkbox" 
+                                   data-ng-disabled="object.permission == 16"
+                                   data-ng-checked="isChecked(object.permission, 1)" 
+                                   data-ng-click="updatePermission(object, 1)" />
                         </td>
                         <td data-title="'Read'">
-                            <input type="checkbox" class="checkbox" data-ng-checked="isChecked(object.permission, 2)" data-ng-click="updatePermission(object, 2)" />
+                            <input type="checkbox" class="checkbox"
+                                   data-ng-disabled="object.permission == 16"
+                                   data-ng-checked="isChecked(object.permission, 2)"
+                                   data-ng-click="updatePermission(object, 2)" />
                         </td>
                         <td data-title="'Update'">
-                            <input type="checkbox" class="checkbox" data-ng-checked="isChecked(object.permission, 4)" data-ng-click="updatePermission(object, 4)" />
+                            <input type="checkbox" class="checkbox"
+                                   data-ng-disabled="object.permission == 16"
+                                   data-ng-checked="isChecked(object.permission, 4)"
+                                   data-ng-click="updatePermission(object, 4)" />
                         </td>
                         <td data-title="'Delete'">
-                            <input type="checkbox" class="checkbox" data-ng-checked="isChecked(object.permission, 8)" data-ng-click="updatePermission(object, 8)" />
+                            <input type="checkbox" class="checkbox"
+                                   data-ng-disabled="object.permission == 16"
+                                   data-ng-checked="isChecked(object.permission, 8)"
+                                   data-ng-click="updatePermission(object, 8)" />
                         </td>
                         <td data-title="'Deny'">
-                            <input type="checkbox" class="checkbox" data-ng-checked="isChecked(object.permission, 16)" data-ng-click="updatePermission(object, 16)" />
+                            <input type="checkbox" class="checkbox" 
+                                   data-ng-checked="isChecked(object.permission, 16)" 
+                                   data-ng-click="updatePermission(object, 16)" />
                         </td>
                     </tr>
                 </tbody>
