@@ -163,7 +163,17 @@ namespace OnionArchitecture.Services.Common
 
             _userRepository.Update(user);
 
-            //Update user permission
+            var inputPermissionIds = input.UserPermissions.Select(p => p.Id);
+            var permissions = _permissionRepository.FindBy(p => inputPermissionIds.Contains(p.Id));
+            foreach (var permission in permissions)
+            {
+                var i = input.UserPermissions.FirstOrDefault(p => p.Id == permission.Id);
+                if(i != null)
+                {
+                    permission.Type = i.Type;
+                    _permissionRepository.Update(permission);
+                }
+            }
 
             _unitOfWork.Commit();
         }

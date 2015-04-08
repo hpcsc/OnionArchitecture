@@ -25,10 +25,13 @@ namespace OnionArchitecture.UI.Web
 
             bundles.Add(new StyleBundle("~/Content/permission").Include(
                       "~/Content/ng-table.min.css",
+                      "~/Content/toaster.min.css",
                       "~/Content/bootstrap-treeview.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/permission").Include(
                       "~/Scripts/angular.min.js",
+                      "~/Scripts/angular-animate.min.js",
+                      "~/Scripts/toaster.min.js",
                       "~/Scripts/ng-table.min.js",
                       "~/Scripts/bootstrap-treeview.min.js",
                       "~/Scripts/app/permission/app.js",

@@ -1,6 +1,6 @@
 ﻿(function () {
-    function handleError(msg) {
-        alert("Failed to get user permssion, error: " + msg);
+    function handleError(msg, toaster) {
+        toaster.pop('danger', "Error", "Error: " + msg);
     }
 
     function mapToTreeModel(resources) {
@@ -30,7 +30,7 @@
     }
 
     angular.module("PermissionModule").controller("PermissionCtrl", [
-        "$scope", "dataService", function ($scope, dataService) {
+        "$scope", "dataService", "toaster", function ($scope, dataService, toaster) {
             $scope.selectedUsername = "";
             $scope.selectedUser = null;
             $scope.searchUserInput = "";
@@ -43,7 +43,9 @@
                         $scope.users = data;
 
                         $scope.showSearchResult = true;
-                    }, handleError);
+                    }, function (msg) {
+                        handleError(msg, toaster);
+                    });
             }
 
 
@@ -52,7 +54,9 @@
 
                 dataService.getUserPermission(username).then(function(user) {
                     $scope.selectedUser = user;
-                }, handleError);
+                }, function (msg) {
+                    handleError(msg, toaster);
+                });
             }
 
             $scope.updateUserRole = function (role) {
@@ -83,12 +87,16 @@
 
                 dataService.updateUserRolesAndPermission(data).then(function (response) {
                     if (response && response.success) {
-                        //refresh
+                        toaster.pop("success", "Success", "User updated successfully");
+                        $scope.searchUser();
+                        $scope.getUserPermission($scope.selectedUsername);
                     }
                     else {
-                        handleError(response.errors.join("<br/>"));
+                        handleError(response.errors.join("<br/>"), toaster);
                     }
-                }, handleError);
+                }, function (msg) {
+                    handleError(msg, toaster);
+                });
             }
 
             $scope.hasRole = function (user, role) {

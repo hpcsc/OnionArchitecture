@@ -1,5 +1,7 @@
 ﻿(function () {
-    angular.module("PermissionModule").directive("resourceTree", ["$rootScope", "dataService", function ($rootScope, dataService) {
+    angular.module("PermissionModule").directive("resourceTree", ["$rootScope", "dataService", "toaster",
+        function ($rootScope, dataService, toaster) {
+
         return {
             restrict: "E",
             scope: {
@@ -37,11 +39,11 @@
                             $rootScope.$broadcast("newResourceAdded");
                         }
                         else {
-                            alert("Failed to add resource, error: " + msg);
+                            toaster.pop("danger", "Error", response.errors.join("<br/>"));
                         }
                     },
                     function (msg) {
-                        alert("Failed to add resource, error: " + msg);
+                        toaster.pop("danger", "Error", msg);
                     })
                 }
             }

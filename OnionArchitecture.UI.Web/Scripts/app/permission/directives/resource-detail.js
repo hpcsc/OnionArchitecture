@@ -1,8 +1,6 @@
 ﻿(function () {
-    angular.module("PermissionModule").directive("resourceDetail", ["ngTableParams", "dataService", "$rootScope", function (ngTableParams, dataService, $rootScope) {
-        function handleError(msg) {
-            alert("Error: " + msg);
-        }
+    angular.module("PermissionModule").directive("resourceDetail", ["ngTableParams", "dataService", "$rootScope", "toaster",
+            function (ngTableParams, dataService, $rootScope, toaster) {
 
         return {
             restrict: "E",
@@ -18,7 +16,9 @@
                             dataService.getResourceDetail($scope.selectedNode.id).then(function (resource) {
                                 $defer.resolve(resource.permissions);
                                 $scope.currentResource = resource;
-                            }, handleError);
+                            }, function (msg) {
+                                toaster.pop("danger", "Error", "Error: " + msg);
+                            });
                         }
                     }
                 });
@@ -72,10 +72,12 @@
                         });
                     });
 
-                    dataService.updateResource(data).then(function(response) {
-                        alert("Resource updated successfully");
+                    dataService.updateResource(data).then(function (response) {
+                        toaster.pop("success", "Success", "Resource updated successfully");
                         $rootScope.$broadcast("resourceUpdated");
-                    }, handleError);
+                    }, function (msg) {
+                        toaster.pop("danger", "Error", "Error: " + msg);
+                    });
                 }
             }
         };

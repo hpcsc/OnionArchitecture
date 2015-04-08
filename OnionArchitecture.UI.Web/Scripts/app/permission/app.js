@@ -1,1 +1,1 @@
-﻿angular.module("PermissionModule", ["ngTable"]);
+﻿angular.module("PermissionModule", ["ngTable", "toaster"]);

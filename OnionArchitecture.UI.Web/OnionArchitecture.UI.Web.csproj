@@ -153,6 +153,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app\permission\app.js" />
     <Content Include="Scripts\app\permission\controllers\permission-ctrl.js" />
@@ -167,6 +168,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="NLog.config" />
     <Content Include="Scripts\bootstrap-treeview.min.js" />
+    <Content Include="Content\toaster.min.css" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -174,6 +176,7 @@
     <Content Include="Scripts\ng-table.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\toaster.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="SetUp\ResourceHierarchyView.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
