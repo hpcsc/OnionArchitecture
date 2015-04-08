@@ -60,18 +60,16 @@ namespace OnionArchitecture.Services.Common
                                         userRoles.Contains(p.RoleId.Value),
                                         p => p.Resource);
 
-            var mergedPermissions = PermissionService.MergePermissions(user.Permissions.Concat(rolePermissions).ToList());
-
             var model = new DisplayUserPermissionModel
             {
                 UserId = user.Id,
                 FullName = user.FullName,
                 Roles = user.Roles.Select(Mapper.Map<Role, RoleDTO>).ToList(),
-                UserPermissions = mergedPermissions.UserPermissions
+                UserPermissions = user.Permissions
                                               .Select(Mapper.Map<Permission, PermissionDTO>)
                                               .OrderBy(p => p.ResourceName)
                                               .ToList(),
-                RolePermissions = mergedPermissions.RolePermissions
+                RolePermissions = PermissionService.MergePermissions(rolePermissions.ToList())
                                               .Select(Mapper.Map<Permission, PermissionDTO>)
                                               .OrderBy(p => p.ResourceName)
                                               .ToList()

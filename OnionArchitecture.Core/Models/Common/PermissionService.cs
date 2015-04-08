@@ -5,38 +5,23 @@ namespace OnionArchitecture.Core.Models.Common
 {
     public class PermissionService
     {
-        public static UserPermissionContainer MergePermissions(List<Permission> permissions)
+        public static List<Permission> MergePermissions(List<Permission> permissions)
         {
-            var userPermissions = new Dictionary<int, Permission>();
-            var rolePermissions = new Dictionary<int, Permission>();
+            var permissionLookUp = new Dictionary<int, Permission>();
 
             foreach (var permission in permissions)
             {
-                if(permission.UserId.HasValue)
+                if (permissionLookUp.ContainsKey(permission.ResourceId))
                 {
-                    if(userPermissions.ContainsKey(permission.UserId.Value))
-                    {
-                        MergeIntoFirstPermission(userPermissions[permission.UserId.Value], permission);
-                    }
-                    else
-                    {
-                        userPermissions[permission.Id] = permission;
-                    }
+                    MergeIntoFirstPermission(permissionLookUp[permission.ResourceId], permission);
                 }
                 else
                 {
-                    if (rolePermissions.ContainsKey(permission.RoleId.Value))
-                    {
-                        MergeIntoFirstPermission(rolePermissions[permission.RoleId.Value], permission);
-                    }
-                    else
-                    {
-                        rolePermissions[permission.Id] = permission;
-                    }
+                    permissionLookUp[permission.ResourceId] = permission;
                 }
             }
 
-            return new UserPermissionContainer(userPermissions.Values.ToList(), rolePermissions.Values.ToList());
+            return permissionLookUp.Values.ToList();
         }
 
         private static void MergeIntoFirstPermission(Permission first, Permission second)

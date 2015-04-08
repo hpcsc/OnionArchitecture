@@ -1,0 +1,11 @@
+C:\Personal\Code\OnionArchitecture\OnionArchitecture.Core.Tests\bin\Debug\OnionArchitecture.Core.Tests.dll
+C:\Personal\Code\OnionArchitecture\OnionArchitecture.Core.Tests\bin\Debug\OnionArchitecture.Core.Tests.pdb
+C:\Personal\Code\OnionArchitecture\OnionArchitecture.Core.Tests\bin\Debug\Moq.dll
+C:\Personal\Code\OnionArchitecture\OnionArchitecture.Core.Tests\bin\Debug\nunit.framework.dll
+C:\Personal\Code\OnionArchitecture\OnionArchitecture.Core.Tests\bin\Debug\Moq.xml
+C:\Personal\Code\OnionArchitecture\OnionArchitecture.Core.Tests\bin\Debug\nunit.framework.xml
+C:\Personal\Code\OnionArchitecture\OnionArchitecture.Core.Tests\obj\Debug\OnionArchitecture.Core.Tests.csprojResolveAssemblyReference.cache
+C:\Personal\Code\OnionArchitecture\OnionArchitecture.Core.Tests\obj\Debug\OnionArchitecture.Core.Tests.dll
+C:\Personal\Code\OnionArchitecture\OnionArchitecture.Core.Tests\obj\Debug\OnionArchitecture.Core.Tests.pdb
+C:\Personal\Code\OnionArchitecture\OnionArchitecture.Core.Tests\bin\Debug\OnionArchitecture.Core.dll
+C:\Personal\Code\OnionArchitecture\OnionArchitecture.Core.Tests\bin\Debug\OnionArchitecture.Core.pdb

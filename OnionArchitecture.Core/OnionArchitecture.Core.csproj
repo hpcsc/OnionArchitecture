@@ -46,6 +46,8 @@
     <Compile Include="Infrastructure\Repositories\IUnitOfWork.cs" />
     <Compile Include="Infrastructure\Repositories\PaginationInfo.cs" />
     <Compile Include="Infrastructure\Settings\IApplicationSettings.cs" />
+    <Compile Include="Models\Common\AuthorizationResult.cs" />
+    <Compile Include="Models\Common\IAuthorizable.cs" />
     <Compile Include="Models\Common\IPermissionRepository.cs" />
     <Compile Include="Models\Common\IResourceRepository.cs" />
     <Compile Include="Models\Common\IRoleRepository.cs" />
@@ -56,7 +58,6 @@
     <Compile Include="Models\Common\Resource.cs" />
     <Compile Include="Models\Common\Role.cs" />
     <Compile Include="Models\Common\User.cs" />
-    <Compile Include="Models\Common\UserPermissionContainer.cs" />
     <Compile Include="Models\Common\UserStatus.cs" />
     <Compile Include="Models\EntityBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
