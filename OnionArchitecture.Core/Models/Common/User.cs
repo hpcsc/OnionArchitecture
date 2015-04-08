@@ -11,6 +11,7 @@ namespace OnionArchitecture.Core.Models.Common
         public string Password { get; set; }
         public string FullName { get; set; }        
         public UserStatus Status { get; set; }
+
         public virtual ICollection<Role> Roles { get; set; }
         public virtual ICollection<Permission> Permissions { get; set; }
 
