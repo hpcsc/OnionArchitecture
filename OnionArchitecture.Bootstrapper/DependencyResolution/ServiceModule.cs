@@ -11,7 +11,8 @@ namespace OnionArchitecture.Bootstrapper.DependencyResolution
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<ManagePermissionService>().As<IManagePermissionService>().InstancePerRequest();
+            builder.RegisterType<ManagePermissionService>().As<IManagePermissionService>().InstancePerRequest()
+                    .PropertiesAutowired();
             builder.RegisterType<AuthenticateService>().As<IAuthenticateService>().InstancePerRequest();
 
             builder.RegisterType<UpdateUserRolesAndPermissionValidator>().

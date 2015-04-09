@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\DTO\CustomPrincipalSerializationModel.cs" />
     <Compile Include="Common\DTO\DisplayResourceDetailModel.cs" />
     <Compile Include="Common\DTO\DisplayUserPermissionModel.cs" />
     <Compile Include="Common\DTO\Input\AddResourceInputModel.cs" />

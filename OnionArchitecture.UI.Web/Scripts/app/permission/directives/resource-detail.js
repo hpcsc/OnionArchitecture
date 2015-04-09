@@ -17,7 +17,7 @@
                                 $defer.resolve(resource.permissions);
                                 $scope.currentResource = resource;
                             }, function (msg) {
-                                toaster.pop("danger", "Error", "Error: " + msg);
+                                toaster.pop("error", "Error", "Error: " + msg);
                             });
                         }
                     }
@@ -76,7 +76,7 @@
                         toaster.pop("success", "Success", "Resource updated successfully");
                         $rootScope.$broadcast("resourceUpdated");
                     }, function (msg) {
-                        toaster.pop("danger", "Error", "Error: " + msg);
+                        toaster.pop("error", "Error", "Error: " + msg);
                     });
                 }
             }

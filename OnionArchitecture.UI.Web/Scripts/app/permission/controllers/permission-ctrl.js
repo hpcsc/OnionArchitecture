@@ -1,6 +1,6 @@
 ﻿(function () {
     function handleError(msg, toaster) {
-        toaster.pop('danger', "Error", "Error: " + msg);
+        toaster.pop('error', "Error", "Error: " + msg);
     }
 
     function mapToTreeModel(resources) {

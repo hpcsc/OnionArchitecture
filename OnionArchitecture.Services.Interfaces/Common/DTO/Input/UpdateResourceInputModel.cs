@@ -5,6 +5,7 @@ namespace OnionArchitecture.Services.Interfaces.Common.DTO.Input
 {
     public class UpdateResourceInputModel
     {
+        public int UserId { get; set; }
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

@@ -39,11 +39,11 @@
                             $rootScope.$broadcast("newResourceAdded");
                         }
                         else {
-                            toaster.pop("danger", "Error", response.errors.join("<br/>"));
+                            toaster.pop("error", "Error", response.errors.join("<br/>"));
                         }
                     },
                     function (msg) {
-                        toaster.pop("danger", "Error", msg);
+                        toaster.pop("error", "Error", msg);
                     })
                 }
             }

@@ -54,6 +54,7 @@
     <Compile Include="Common\Validators\UpdateResourceValidator.cs" />
     <Compile Include="Common\Validators\UpdateUserRolesAndPermissionValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OnionArchitecture.Core\OnionArchitecture.Core.csproj">

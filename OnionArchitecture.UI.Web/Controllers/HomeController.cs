@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using OnionArchitecture.Services.Interfaces.Common;
+using OnionArchitecture.Services.Interfaces.Common.DTO;
+using System;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using System.Web.Security;
-using OnionArchitecture.Services.Interfaces.Common;
 
 namespace OnionArchitecture.UI.Web.Controllers
 {
@@ -47,12 +47,33 @@ namespace OnionArchitecture.UI.Web.Controllers
         {
             if (_authenticateService.IsValidUser(username, password))
             {
-                FormsAuthentication.SetAuthCookie(username, false);
+                var model = _authenticateService.GetUserSerializationModelByUsername(username);
+                StoreCustomPrincipalInCookie(model, false);
+
                 return RedirectToAction("Index", "Permission");
             }
 
             TempData["Message"] = "Invalid username or password";
             return RedirectToAction("Login");
+        }
+
+        private void StoreCustomPrincipalInCookie(CustomPrincipalSerializationModel customPrincipal, bool rememberMe)
+        {
+            var serializer = new JavaScriptSerializer();
+            string userData = serializer.Serialize(customPrincipal);
+
+            var authTicket = new FormsAuthenticationTicket(1, customPrincipal.Username, DateTime.Now, DateTime.Now.AddMinutes(30), rememberMe, userData);
+            string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
+            var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+
+            Response.Cookies.Add(authCookie);
+        }
+
+        [HttpPost]
+        public ActionResult LogOff()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index");
         }
     }
 }

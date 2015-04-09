@@ -104,6 +104,25 @@ namespace OnionArchitecture.Repository.EntityFramework
                             }
                         }
                     }
+                },
+                new Resource
+                {
+                    Name = "Modules",
+                    Children = new List<Resource>
+                    {
+                        new Resource
+                        {
+                            Name = "Permission",
+                            Permissions = new List<Permission>
+                            {
+                                new Permission
+                                {
+                                    UserId = users[0].Id,
+                                    Type = PermissionType.Read | PermissionType.Update | PermissionType.Create
+                                }
+                            }
+                        }
+                    }
                 }
             };
 

@@ -7,10 +7,11 @@ using OnionArchitecture.Services.Interfaces.Common.DTO;
 using OnionArchitecture.Services.Interfaces.Common.DTO.Input;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 
 namespace OnionArchitecture.Services.Common
 {
-    public class ManagePermissionService : IManagePermissionService
+    public class ManagePermissionService : ServiceBase, IManagePermissionService
     {
         private readonly IRoleRepository _roleRepository;
         private readonly IUserRepository _userRepository;
@@ -144,6 +145,11 @@ namespace OnionArchitecture.Services.Common
 
         public void UpdateUserRolesAndPermission(UpdateUserRolesAndPermissionInputModel input)
         {
+            if (!UserHasAccessToResource(input.UserId, "Modules.Permission", PermissionType.Update))
+            {
+                throw new SecurityException("User is not allowed to update resource");
+            }
+
             var validator = _validatorFactory.GetValidator<UpdateUserRolesAndPermissionInputModel>();
             validator.ValidateAndThrow(input);
 
@@ -178,6 +184,11 @@ namespace OnionArchitecture.Services.Common
 
         public void UpdateResource(UpdateResourceInputModel input)
         {
+            if (!UserHasAccessToResource(input.UserId, "Modules.Permission", PermissionType.Update))
+            {
+                throw new SecurityException("User is not allowed to update resource");
+            }
+
             var validator = _validatorFactory.GetValidator<UpdateResourceInputModel>();
             validator.ValidateAndThrow(input);
 
@@ -226,6 +237,11 @@ namespace OnionArchitecture.Services.Common
 
         public void AddResource(AddResourceInputModel input)
         {
+            if(!UserHasAccessToResource(input.UserId, "Modules.Permission", PermissionType.Create))
+            {
+                throw new SecurityException("User is not allowed to add resource");
+            }
+
             var validator = _validatorFactory.GetValidator<AddResourceInputModel>();
             validator.ValidateAndThrow(input);
 

@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Infrastructure\Caching\ICacheStore.cs" />
     <Compile Include="Infrastructure\Exceptions\BusinessException.cs" />
     <Compile Include="Infrastructure\Exceptions\ExceptionBase.cs" />
     <Compile Include="Infrastructure\Logging\ILogger.cs" />

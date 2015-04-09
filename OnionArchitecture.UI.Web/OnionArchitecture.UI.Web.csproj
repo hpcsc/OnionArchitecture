@@ -123,15 +123,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Content\Controllers\ControllerBase.cs" />
-    <Compile Include="Content\Controllers\HomeController.cs" />
-    <Compile Include="Content\Controllers\PermissionController.cs" />
+    <Compile Include="Controllers\ControllerBase.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PermissionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -142,6 +141,7 @@
     <Compile Include="Helpers\HandleBusinessExceptionExceptionFilter.cs" />
     <Compile Include="Helpers\ModelStateExtension.cs" />
     <Compile Include="Helpers\ValidateModelStateActionFilter.cs" />
+    <Compile Include="Models\CustomPrincipal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -202,6 +202,7 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Shared\_Alert.cshtml" />
     <Content Include="Scripts\ng-table.min.js.map" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OnionArchitecture.Bootstrapper\OnionArchitecture.Bootstrapper.csproj">
