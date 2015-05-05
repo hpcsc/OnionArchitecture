@@ -38,6 +38,8 @@ namespace OnionArchitecture.Repository.EntityFramework
             modelBuilder.Configurations.Add(new UserMap());
             modelBuilder.Configurations.Add(new PermissionMap());
             modelBuilder.Configurations.Add(new ResourceMap());
+            modelBuilder.Configurations.Add(new AuditMap());
+            modelBuilder.Configurations.Add(new AuditedValueMap());
         }
     }
 }

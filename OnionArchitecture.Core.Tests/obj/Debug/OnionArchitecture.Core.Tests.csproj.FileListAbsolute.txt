@@ -9,3 +9,4 @@ C:\Personal\Code\OnionArchitecture\OnionArchitecture.Core.Tests\obj\Debug\OnionA
 C:\Personal\Code\OnionArchitecture\OnionArchitecture.Core.Tests\obj\Debug\OnionArchitecture.Core.Tests.pdb
 C:\Personal\Code\OnionArchitecture\OnionArchitecture.Core.Tests\bin\Debug\OnionArchitecture.Core.dll
 C:\Personal\Code\OnionArchitecture\OnionArchitecture.Core.Tests\bin\Debug\OnionArchitecture.Core.pdb
+C:\Personal\Code\OnionArchitecture\OnionArchitecture.Core.Tests\bin\Debug\Newtonsoft.Json.dll

@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\AuditRepository.cs" />
     <Compile Include="Common\PermissionRepository.cs" />
     <Compile Include="Common\ResourceRepository.cs" />
     <Compile Include="Common\RoleRepository.cs" />
@@ -54,6 +55,8 @@
     <Compile Include="DbInitializer.cs" />
     <Compile Include="DbQueryExtension.cs" />
     <Compile Include="IDbContext.cs" />
+    <Compile Include="Mapping\AuditedValueMap.cs" />
+    <Compile Include="Mapping\AuditMap.cs" />
     <Compile Include="Mapping\EntityBaseMap.cs" />
     <Compile Include="Mapping\PermissionMap.cs" />
     <Compile Include="Mapping\ResourceMap.cs" />

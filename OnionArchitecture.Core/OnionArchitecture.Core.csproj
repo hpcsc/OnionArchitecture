@@ -30,6 +30,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -39,6 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Infrastructure\Auditing\IAuditable.cs" />
+    <Compile Include="Infrastructure\Auditing\IAuditor.cs" />
+    <Compile Include="Infrastructure\Auditing\PublicPropertiesAuditor.cs" />
     <Compile Include="Infrastructure\Caching\ICacheStore.cs" />
     <Compile Include="Infrastructure\Exceptions\BusinessException.cs" />
     <Compile Include="Infrastructure\Exceptions\ExceptionBase.cs" />
@@ -47,7 +51,10 @@
     <Compile Include="Infrastructure\Repositories\IUnitOfWork.cs" />
     <Compile Include="Infrastructure\Repositories\PaginationInfo.cs" />
     <Compile Include="Infrastructure\Settings\IApplicationSettings.cs" />
+    <Compile Include="Models\Common\Audit.cs" />
+    <Compile Include="Models\Common\AuditedValue.cs" />
     <Compile Include="Models\Common\AuthorizationResult.cs" />
+    <Compile Include="Models\Common\IAuditRepository.cs" />
     <Compile Include="Models\Common\IAuthorizable.cs" />
     <Compile Include="Models\Common\IPermissionRepository.cs" />
     <Compile Include="Models\Common\IResourceRepository.cs" />

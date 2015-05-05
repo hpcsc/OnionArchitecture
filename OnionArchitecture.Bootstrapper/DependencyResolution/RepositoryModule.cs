@@ -17,6 +17,7 @@ namespace OnionArchitecture.Bootstrapper.DependencyResolution
             builder.RegisterType<RoleRepository>().As<IRoleRepository>().InstancePerRequest();
             builder.RegisterType<ResourceRepository>().As<IResourceRepository>().InstancePerRequest();
             builder.RegisterType<PermissionRepository>().As<IPermissionRepository>().InstancePerRequest();
+            builder.RegisterType<AuditRepository>().As<IAuditRepository>().InstancePerRequest();
         }
     }
 }

@@ -2,6 +2,7 @@
 using FluentValidation;
 using OnionArchitecture.Core.Infrastructure.Repositories;
 using OnionArchitecture.Core.Models.Common;
+using OnionArchitecture.Infrastructure.Aspects;
 using OnionArchitecture.Services.Interfaces.Common;
 using OnionArchitecture.Services.Interfaces.Common.DTO;
 using OnionArchitecture.Services.Interfaces.Common.DTO.Input;
@@ -182,6 +183,7 @@ namespace OnionArchitecture.Services.Common
             _unitOfWork.Commit();
         }
 
+        [AuditAction(Action = "Update resource")]
         public void UpdateResource(UpdateResourceInputModel input)
         {
             if (!UserHasAccessToResource(input.UserId, "Modules.Permission", PermissionType.Update))
