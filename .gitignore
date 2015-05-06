@@ -2,6 +2,8 @@
 /OnionArchitecture.Bootstrapper/obj
 /OnionArchitecture.Core/bin
 /OnionArchitecture.Core/obj
+/OnionArchitecture.Core.Tests/bin
+/OnionArchitecture.Core.Tests/obj
 /OnionArchitecture.Infrastructure/bin
 /OnionArchitecture.Infrastructure/obj
 /OnionArchitecture.Repository.EntityFramework/bin
