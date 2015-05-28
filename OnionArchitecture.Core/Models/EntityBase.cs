@@ -2,18 +2,18 @@
 using System;
 namespace OnionArchitecture.Core.Models
 {
-    public class EntityBase : IEquatable<EntityBase>
+    public class EntityBase<T> : IEquatable<EntityBase<T>> where T : IEquatable<T>
     {
-        public int Id { get; set; }
+        public T Id { get; set; }
 
-        public bool Equals(EntityBase other)
+        public bool Equals(EntityBase<T> other)
         {
-            return Id == other.Id;
+            return Id.Equals(other.Id);
         }
 
         public override bool Equals(object obj)
         {
-            EntityBase other = obj as EntityBase;
+            EntityBase<T> other = obj as EntityBase<T>;
             return other != null && Equals(other);
         }
 

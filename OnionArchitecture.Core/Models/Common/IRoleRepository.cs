@@ -2,7 +2,7 @@
 
 namespace OnionArchitecture.Core.Models.Common
 {
-    public interface IRoleRepository : IRepository<Role>
+    public interface IRoleRepository : IRepository<Role, int>
     {
     }
 }

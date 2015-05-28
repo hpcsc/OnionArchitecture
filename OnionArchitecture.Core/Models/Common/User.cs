@@ -5,7 +5,7 @@ using System.Security;
 
 namespace OnionArchitecture.Core.Models.Common
 {
-    public class User : EntityBase, IAuthorizable
+    public class User : EntityBase<int>, IAuthorizable
     {
         public string UserName { get; set; }
         public string Password { get; set; }

@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace OnionArchitecture.Repository.EntityFramework.Common
 {
-    public class ResourceRepository : RepositoryBase<Resource>, IResourceRepository
+    public class ResourceRepository : RepositoryBase<Resource, int>, IResourceRepository
     {
         public ResourceRepository(IDbContext context) : 
             base(context)

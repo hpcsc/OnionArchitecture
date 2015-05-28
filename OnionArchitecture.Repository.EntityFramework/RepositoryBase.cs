@@ -8,7 +8,9 @@ using System.Linq.Expressions;
 
 namespace OnionArchitecture.Repository.EntityFramework
 {
-    public abstract class RepositoryBase<T> : IRepository<T> where T : EntityBase
+    public abstract class RepositoryBase<T, K> : IRepository<T, K> 
+        where T : EntityBase<K>
+        where K : IEquatable<K>
     {
         protected readonly IDbContext Context;
         protected IDbSet<T> Set;
@@ -19,9 +21,9 @@ namespace OnionArchitecture.Repository.EntityFramework
             Set = Context.Set<T>();
         }
 
-        public T FindBy(int id, params Expression<Func<T, object>>[] includeExpressions)
+        public T FindBy(K id, params Expression<Func<T, object>>[] includeExpressions)
         {
-            Expression<Func<T, bool>> filter = (e => e.Id == id);
+            Expression<Func<T, bool>> filter = (e => e.Id.Equals(id));
             return FindBy(filter, includeExpressions).FirstOrDefault();
         }
 
@@ -103,7 +105,7 @@ namespace OnionArchitecture.Repository.EntityFramework
             }
         }
 
-        public void Delete(int id)
+        public void Delete(K id)
         {
             T entity = FindBy(id);
             if (entity == null)

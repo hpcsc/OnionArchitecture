@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 namespace OnionArchitecture.Core.Models.Common
 {
-    public class Resource : EntityBase
+    public class Resource : EntityBase<int>
     {
         public string Name { get; set; }
         public string Description { get; set; }

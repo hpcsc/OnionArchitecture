@@ -1,7 +1,7 @@
 ﻿
 namespace OnionArchitecture.Core.Models.Common
 {
-    public class Permission : EntityBase
+    public class Permission : EntityBase<int>
     {
         public int? UserId { get; set; }
         public int? RoleId { get; set; }

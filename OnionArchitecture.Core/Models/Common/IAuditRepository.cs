@@ -2,7 +2,7 @@
 
 namespace OnionArchitecture.Core.Models.Common
 {
-    public interface IAuditRepository : IRepository<Audit>
+    public interface IAuditRepository : IRepository<Audit, int>
     {
     }
 }

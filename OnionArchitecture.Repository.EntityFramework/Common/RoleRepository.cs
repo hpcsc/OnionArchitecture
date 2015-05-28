@@ -2,7 +2,7 @@
 
 namespace OnionArchitecture.Repository.EntityFramework.Common
 {
-    public class RoleRepository : RepositoryBase<Role>, IRoleRepository
+    public class RoleRepository : RepositoryBase<Role, int>, IRoleRepository
     {
         public RoleRepository(IDbContext context)
             :base(context)
