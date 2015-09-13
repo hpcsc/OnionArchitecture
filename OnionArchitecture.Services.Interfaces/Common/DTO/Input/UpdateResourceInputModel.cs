@@ -1,10 +1,9 @@
-﻿using OnionArchitecture.Core.Infrastructure.Auditing;
-using OnionArchitecture.Core.Models.Common;
+﻿using OnionArchitecture.Core.Models.Common;
 using System.Collections.Generic;
 
 namespace OnionArchitecture.Services.Interfaces.Common.DTO.Input
 {
-    public class UpdateResourceInputModel : IAuditable
+    public class UpdateResourceInputModel
     {
         public int UserId { get; set; }
         public int Id { get; set; }

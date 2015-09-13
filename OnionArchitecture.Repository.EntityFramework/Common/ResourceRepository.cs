@@ -1,12 +1,14 @@
-﻿using OnionArchitecture.Core.Models.Common;
+﻿using System.Data.Entity;
+using OnionArchitecture.Core.Models.Common;
 using System.Collections.Generic;
 using System.Linq;
+using OnionArchitecture.Repository.EntityFramework.PersistenceModel;
 
 namespace OnionArchitecture.Repository.EntityFramework.Common
 {
-    public class ResourceRepository : RepositoryBase<Resource, int>, IResourceRepository
+    public class ResourceRepository : RepositoryBase<ResourcePersistenceModel, int>, IResourceRepository
     {
-        public ResourceRepository(IDbContext context) : 
+        public ResourceRepository(DbContext context) : 
             base(context)
         {
         }
@@ -14,8 +16,6 @@ namespace OnionArchitecture.Repository.EntityFramework.Common
         public IEnumerable<Resource> GetResourceHierarchy()
         {
             var resources = FindBy(r => !r.ParentId.HasValue, r => r.Children).ToList();
-
-            var secondLevelChildren = resources.SelectMany(r => r.Children);
 
             LoadChildren(resources);
 

@@ -5,7 +5,7 @@ namespace OnionArchitecture.Core.Models.Common
 {
     public class PermissionService
     {
-        public static List<Permission> MergePermissions(List<Permission> permissions)
+        public static List<Permission> MergePermissions(IList<Permission> permissions)
         {
             var permissionLookUp = new Dictionary<int, Permission>();
 

@@ -8,14 +8,14 @@ using System.Linq.Expressions;
 
 namespace OnionArchitecture.Repository.EntityFramework
 {
-    public abstract class RepositoryBase<T, K> : IRepository<T, K> 
+    public abstract class RepositoryBase<T, K>
         where T : EntityBase<K>
         where K : IEquatable<K>
     {
-        protected readonly IDbContext Context;
+        protected readonly DbContext Context;
         protected IDbSet<T> Set;
 
-        protected RepositoryBase(IDbContext context)
+        protected RepositoryBase(DbContext context)
         {
             Context = context;
             Set = Context.Set<T>();
@@ -80,11 +80,6 @@ namespace OnionArchitecture.Repository.EntityFramework
             }
 
             return query.ToList();
-        }
-
-        private IQueryable<T> GetQueryable()
-        {
-            return Set;
         }
 
         public void Add(T entity)

@@ -7,9 +7,18 @@ namespace OnionArchitecture.Core.Models.Common
 {
     public class Role : EntityBase<int>, IAuthorizable
     {
-        public string Name { get; set; }
+        private string Name { get; set; }
 
-        public virtual ICollection<Permission> Permissions { get; set; }
+        private IList<Permission> Permissions { get; set; }
+
+        public RoleSnapshot GetSnapshot()
+        {
+            return new RoleSnapshot
+            {
+                Id = Id,
+                Name = Name
+            };
+        }
 
         public bool HasAccessTo(int resourceId, PermissionType type)
         {
