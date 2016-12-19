@@ -2,8 +2,7 @@
 
 namespace OnionArchitecture.Core.Models.Common
 {
-    public interface IUserRepository
+    public interface IUserRepository : IRepository<User, int>
     {
-        User FindByUsername(string username);
     }
 }

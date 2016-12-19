@@ -42,16 +42,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Infrastructure\Auditing\IAuditable.cs" />
+    <Compile Include="Infrastructure\Auditing\IAuditor.cs" />
+    <Compile Include="Infrastructure\Auditing\PublicPropertiesAuditor.cs" />
     <Compile Include="Infrastructure\Caching\ICacheStore.cs" />
     <Compile Include="Infrastructure\Exceptions\BusinessException.cs" />
     <Compile Include="Infrastructure\Exceptions\ExceptionBase.cs" />
     <Compile Include="Infrastructure\Logging\ILogger.cs" />
-    <Compile Include="Infrastructure\Repositories\IAmQueryBuilder.cs" />
-    <Compile Include="Infrastructure\Repositories\ISupportFluentQuery.cs" />
+    <Compile Include="Infrastructure\Repositories\IRepository.cs" />
     <Compile Include="Infrastructure\Repositories\IUnitOfWork.cs" />
     <Compile Include="Infrastructure\Repositories\PaginationInfo.cs" />
     <Compile Include="Infrastructure\Settings\IApplicationSettings.cs" />
+    <Compile Include="Models\Common\Audit.cs" />
+    <Compile Include="Models\Common\AuditedValue.cs" />
     <Compile Include="Models\Common\AuthorizationResult.cs" />
+    <Compile Include="Models\Common\IAuditRepository.cs" />
     <Compile Include="Models\Common\IAuthorizable.cs" />
     <Compile Include="Models\Common\IPermissionRepository.cs" />
     <Compile Include="Models\Common\IResourceRepository.cs" />
@@ -61,14 +66,10 @@
     <Compile Include="Models\Common\PermissionService.cs" />
     <Compile Include="Models\Common\PermissionType.cs" />
     <Compile Include="Models\Common\Resource.cs" />
-    <Compile Include="Models\Common\ResourceSnapshot.cs" />
     <Compile Include="Models\Common\Role.cs" />
-    <Compile Include="Models\Common\RoleSnapshot.cs" />
     <Compile Include="Models\Common\User.cs" />
-    <Compile Include="Models\Common\UserSnapshot.cs" />
     <Compile Include="Models\Common\UserStatus.cs" />
     <Compile Include="Models\EntityBase.cs" />
-    <Compile Include="Models\ValueObjectBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,11 +1,8 @@
-﻿using System.Collections.Generic;
-
+﻿
+using OnionArchitecture.Core.Infrastructure.Repositories;
 namespace OnionArchitecture.Core.Models.Common
 {
-    public interface IPermissionRepository
+    public interface IPermissionRepository : IRepository<Permission, int>
     {
-        IList<Permission> FindPermissionsForUser(User user);
-        IList<Permission> FindPermissionsForRoles(IList<Role> roles);
-        IList<Permission> FindPermissionsForResource(Resource resource);
     }
 }

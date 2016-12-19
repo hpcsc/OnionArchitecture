@@ -13,7 +13,7 @@ namespace OnionArchitecture.Core.Models
 
         public override bool Equals(object obj)
         {
-            var other = obj as EntityBase<T>;
+            EntityBase<T> other = obj as EntityBase<T>;
             return other != null && Equals(other);
         }
 

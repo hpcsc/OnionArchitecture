@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data.Entity;
 using OnionArchitecture.Core.Infrastructure.Repositories;
 
 namespace OnionArchitecture.Repository.EntityFramework
@@ -7,16 +6,16 @@ namespace OnionArchitecture.Repository.EntityFramework
     public class UnitOfWork : IUnitOfWork
     {
         private bool _disposed;
-        private readonly DbContext _context;
+        private readonly IDbContext _context;
 
-        public UnitOfWork(DbContext context)
+        public UnitOfWork(IDbContext context)
         {
             _context = context;
         }
 
         public void Commit()
         {
-            _context.SaveChanges();
+            _context.Commit();
         }
 
         public void Dispose()

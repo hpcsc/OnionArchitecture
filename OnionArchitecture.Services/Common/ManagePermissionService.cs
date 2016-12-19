@@ -2,6 +2,7 @@
 using FluentValidation;
 using OnionArchitecture.Core.Infrastructure.Repositories;
 using OnionArchitecture.Core.Models.Common;
+using OnionArchitecture.Infrastructure.Aspects;
 using OnionArchitecture.Services.Interfaces.Common;
 using OnionArchitecture.Services.Interfaces.Common.DTO;
 using OnionArchitecture.Services.Interfaces.Common.DTO.Input;
@@ -52,24 +53,25 @@ namespace OnionArchitecture.Services.Common
 
         public DisplayUserPermissionModel GetUserPermission(string username)
         {
-            var user = _userRepository.FindByUsername(username);
-            var userSnapshot = user.GetSnapshot();
+            var user = _userRepository.FindBy(u => u.UserName == username, 
+                u => u.Roles, 
+                u => u.Permissions.Select(p => p.Resource)).FirstOrDefault();
 
-            var roles = _roleRepository.FindRolesForUser(user);
-
-            var userPermissions = _permissionRepository.FindPermissionsForUser(user);
-            var rolePermissions = _permissionRepository.FindPermissionsForRoles(roles);
+            var userRoles = user.Roles.Select(r => r.Id);
+            var rolePermissions = _permissionRepository.FindBy(p => p.RoleId.HasValue &&
+                                        userRoles.Contains(p.RoleId.Value),
+                                        p => p.Resource);
 
             var model = new DisplayUserPermissionModel
             {
-                UserId = userSnapshot.Id,
-                FullName = userSnapshot.FullName,
-                Roles = roles.Select(r => Mapper.Map<RoleSnapshot, RoleDTO>(r.GetSnapshot())).ToList(),
-                UserPermissions = userPermissions
+                UserId = user.Id,
+                FullName = user.FullName,
+                Roles = user.Roles.Select(Mapper.Map<Role, RoleDTO>).ToList(),
+                UserPermissions = user.Permissions
                                               .Select(Mapper.Map<Permission, PermissionDTO>)
                                               .OrderBy(p => p.ResourceName)
                                               .ToList(),
-                RolePermissions = PermissionService.MergePermissions(rolePermissions)
+                RolePermissions = PermissionService.MergePermissions(rolePermissions.ToList())
                                               .Select(Mapper.Map<Permission, PermissionDTO>)
                                               .OrderBy(p => p.ResourceName)
                                               .ToList()
@@ -82,15 +84,15 @@ namespace OnionArchitecture.Services.Common
         {
             var users = _userRepository.FindAll();
             var roles = _roleRepository.FindAll();
-            var resource = _resourceRepository.FindBy(resourceId);
-            var resourceSnapshot = resource.GetSnapshot();
-            var permissions = _permissionRepository.FindPermissionsForResource(resource);
+            var resource = _resourceRepository.FindBy(r => r.Id == resourceId, 
+                                                      r => r.Permissions.Select(p => p.User), 
+                                                      r => r.Permissions.Select(p => p.Role)).FirstOrDefault();
 
             var model = new DisplayResourceDetailModel
             {
-                ResourceId = resourceSnapshot.Id,
-                ResourceName = resourceSnapshot.Name,
-                ResourceDescription = resourceSnapshot.Description,
+                ResourceId = resource.Id,
+                ResourceName = resource.Name,
+                ResourceDescription = resource.Description,
                 Permissions = resource.Permissions.Select(p => 
                     {
                         if(p.UserId.HasValue)
@@ -180,7 +182,8 @@ namespace OnionArchitecture.Services.Common
 
             _unitOfWork.Commit();
         }
-        
+
+        [AuditAction(Action = "Update resource")]
         public void UpdateResource(UpdateResourceInputModel input)
         {
             if (!UserHasAccessToResource(input.UserId, "Modules.Permission", PermissionType.Update))

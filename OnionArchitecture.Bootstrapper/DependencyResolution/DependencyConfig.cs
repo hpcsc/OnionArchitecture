@@ -1,5 +1,8 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
+using OnionArchitecture.Core.Infrastructure.Repositories;
+using OnionArchitecture.Core.Models.Common;
+using OnionArchitecture.Infrastructure.Aspects;
 using System.Reflection;
 using System.Web.Mvc;
 
@@ -26,7 +29,15 @@ namespace OnionArchitecture.Bootstrapper.DependencyResolution
             //Set current dependency resolver to Autofac dependency resolver with current container,
             //Autofac will take over generation of ASP.NET MVC controllers
             //and we will be able to use Current property to get current Dependency Resolver
-            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));            
-        }        
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+
+            SetupAspects();
+        }
+
+        private static void SetupAspects()
+        {
+            AuditActionAttribute.AuditRepositoryFactory = () => DependencyResolver.Current.GetService<IAuditRepository>();
+            AuditActionAttribute.UnitOfWorkFactory = () => DependencyResolver.Current.GetService<IUnitOfWork>();
+        }
     }
 }

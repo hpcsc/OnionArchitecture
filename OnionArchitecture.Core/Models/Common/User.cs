@@ -7,24 +7,17 @@ namespace OnionArchitecture.Core.Models.Common
 {
     public class User : EntityBase<int>, IAuthorizable
     {
-        private string UserName { get; set; }
-        private string Password { get; set; }
-        private string FullName { get; set; }        
-        private UserStatus Status { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public string FullName { get; set; }        
+        public UserStatus Status { get; set; }
 
-        private IList<Role> Roles { get; set; }
-        private IList<Permission> Permissions { get; set; }
+        public virtual ICollection<Role> Roles { get; set; }
+        public virtual ICollection<Permission> Permissions { get; set; }
 
-        public UserSnapshot GetSnapshot()
+        public User()
         {
-            return new UserSnapshot
-            {
-                Id = Id,
-                UserName = UserName,
-                Password = Password,
-                FullName = FullName,
-                Status = Status
-            };
+            Roles = new List<Role>();
         }
 
         public bool HasAccessTo(int resourceId, PermissionType type)

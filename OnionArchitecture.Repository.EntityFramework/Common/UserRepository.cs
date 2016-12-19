@@ -1,19 +1,12 @@
-﻿using System.Data.Entity;
-using OnionArchitecture.Core.Infrastructure.Repositories;
-using OnionArchitecture.Core.Models.Common;
+﻿using OnionArchitecture.Core.Models.Common;
 
 namespace OnionArchitecture.Repository.EntityFramework.Common
 {
     public class UserRepository : RepositoryBase<User, int>, IUserRepository
     {
-        public UserRepository(DbContext context)
+        public UserRepository(IDbContext context)
             :base(context)
         {            
-        }
-
-        public User FindByUsername(string username)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

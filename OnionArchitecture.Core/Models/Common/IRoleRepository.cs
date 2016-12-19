@@ -1,12 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using OnionArchitecture.Core.Infrastructure.Repositories;
+﻿using OnionArchitecture.Core.Infrastructure.Repositories;
 
 namespace OnionArchitecture.Core.Models.Common
 {
-    public interface IRoleRepository
+    public interface IRoleRepository : IRepository<Role, int>
     {
-        IList<Role> FindAll();
-        IList<Role> FindRolesForUser(User user);
     }
 }
