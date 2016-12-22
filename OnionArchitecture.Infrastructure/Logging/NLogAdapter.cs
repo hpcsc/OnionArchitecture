@@ -1,10 +1,10 @@
 ﻿using NLog;
-using OnionArchitecture.Core.Infrastructure.Logging;
 using OnionArchitecture.Core.Infrastructure.Settings;
+using OnionLogging = OnionArchitecture.Core.Infrastructure.Logging;
 
 namespace OnionArchitecture.Infrastructure.Logging
 {
-    public class NLogAdapter : ILogger
+    public class NLogAdapter : OnionLogging.ILogger
     {
         private readonly Logger _logger;
 

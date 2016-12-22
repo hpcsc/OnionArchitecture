@@ -8,11 +8,14 @@ namespace OnionArchitecture.Bootstrapper
     {
         public static void SetupBindings()
         {
-            Mapper.CreateMap<Role, RoleDTO>();
-            Mapper.CreateMap<User, UserDTO>();
-            Mapper.CreateMap<User, CustomPrincipalSerializationModel>();
-            Mapper.CreateMap<Permission, PermissionDTO>();
-            Mapper.CreateMap<Resource, ResourceDTO>();
+            Mapper.Initialize(config =>
+            {
+                config.CreateMap<Role, RoleDTO>();
+                config.CreateMap<User, UserDTO>();
+                config.CreateMap<User, CustomPrincipalSerializationModel>();
+                config.CreateMap<Permission, PermissionDTO>();
+                config.CreateMap<Resource, ResourceDTO>();
+            });
         }
     }
 }
