@@ -1,14 +1,13 @@
 ﻿using Autofac;
 using OnionArchitecture.Core.Infrastructure.Repositories;
 using OnionArchitecture.Core.Models.Common;
-using OnionArchitecture.Repository.EntityFramework;
 using OnionArchitecture.Repository.EntityFramework.Common;
 
-namespace OnionArchitecture.Bootstrapper.DependencyResolution
+namespace OnionArchitecture.Repository.EntityFramework
 {
-    public class RepositoryModule : Module
+    public class Bootstrapper
     {
-        protected override void Load(ContainerBuilder builder)
+        public void ConfigureContainer(ContainerBuilder builder)
         {
             builder.RegisterType<OnionArchDbContext>().As<IDbContext>().InstancePerLifetimeScope()
                 .WithParameter("connectionStringName", "OnionArchConnection");
