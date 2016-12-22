@@ -5,4 +5,4 @@ install:
   - nuget install NUnit.Console -Version 3.5.0 -OutputDirectory testrunner
 script:
   - xbuild /p:Configuration=Release OnionArchitecture.sln
-  - mono ./testrunner/NUnit.Console.3.5.0/tools/nunit3-console.exe ./OnionArchitecture.Core.Tests/bin/Release/OnionArchitecture.Core.Tests.dll
+  - mono ./testrunner/NUnit.ConsoleRunner.3.5.0/tools/nunit3-console.exe ./OnionArchitecture.Core.Tests/bin/Release/OnionArchitecture.Core.Tests.dll
