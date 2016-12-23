@@ -66,10 +66,6 @@
       <Project>{a2afe8a3-8b82-4d7a-bd8d-d5359dad7587}</Project>
       <Name>OnionArchitecture.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OnionArchitecture.Infrastructure\OnionArchitecture.Infrastructure.csproj">
-      <Project>{5b7efef3-446d-45a4-8566-9afef7892851}</Project>
-      <Name>OnionArchitecture.Infrastructure</Name>
-    </ProjectReference>
     <ProjectReference Include="..\OnionArchitecture.Services.Interfaces\OnionArchitecture.Services.Interfaces.csproj">
       <Project>{38800c64-6bc9-434e-bc59-a5366a573bef}</Project>
       <Name>OnionArchitecture.Services.Interfaces</Name>
