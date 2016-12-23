@@ -71,6 +71,17 @@ namespace OnionArchitecture.UI.Web
                     HttpContext.Current.User = customPrincipal;
                 }
             }
-        } 
+        }
+
+        protected void Session_Start(object sender, EventArgs e)
+        {
+            if (HttpContext.Current.Request.IsAuthenticated)
+            {
+                //New session but user's still authenticated
+                FormsAuthentication.SignOut();
+                FormsAuthentication.RedirectToLoginPage("session-expired");
+                HttpContext.Current.Response.End();
+            }
+        }
     }
 }
