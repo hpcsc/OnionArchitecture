@@ -18,7 +18,7 @@ This project is no longer maintained, however I still keep it here since it's st
 
 ### Architecture
 
-[![Architecture](https://dl.dropboxusercontent.com/u/55034418/OnionArchitectureDiagram.png)](https://dl.dropboxusercontent.com/u/55034418/OnionArchitectureDiagram.png)
+![alt Architecture](https://raw.githubusercontent.com/hpcsc/OnionArchitecture/master/OnionArchitecture.png)
 
 #### Solution Structure
 
